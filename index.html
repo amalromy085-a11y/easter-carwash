@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Easter Car Wash · Easter Group</title>
-<link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060912;--surface:#0d1220;--surface2:#131b2e;--surface3:#192238;--border:#1e2d47;--border2:#253554;--accent:#4f8ef7;--accent-glow:rgba(79,142,247,0.18);--accent2:#22d98a;--accent2-glow:rgba(34,217,138,0.15);--accent3:#f97c4f;--warn:#f5c842;--danger:#f05252;--brand:#c8102e;--purple:#a78bfa;--text:#e2eaf8;--text2:#7a92b8;--text3:#3a506e;--card-shadow:0 4px 24px rgba(0,0,0,0.5);--radius:14px;--radius-sm:9px}
@@ -15,7 +14,6 @@ body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:68px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .logo-area{display:flex;align-items:center;gap:14px}
 .logo-img{height:40px;width:auto;object-fit:contain;background:#fff;padding:4px 8px;border-radius:8px;border:1px solid var(--border)}
-body.light .logo-img{background:#fff;border-color:var(--border)}
 .brand-name{font-family:'Sora',sans-serif;font-weight:800;font-size:17px;letter-spacing:-0.4px;line-height:1}
 .brand-sub{font-size:10.5px;color:var(--text2);letter-spacing:0.8px;text-transform:uppercase;font-weight:500;margin-top:3px}
 .nav-tabs{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:4px}
@@ -41,6 +39,12 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 .entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .full-col{grid-column:1/-1}
 .suggestions-box{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface3);border:1.5px solid var(--accent);border-radius:var(--radius-sm);z-index:50;max-height:200px;overflow-y:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.model-suggest-box{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1.5px solid var(--accent);border-radius:var(--radius-sm);z-index:60;max-height:220px;overflow-y:auto;display:none;box-shadow:0 8px 28px rgba(0,0,0,0.35)}
+.model-suggest-item{padding:10px 15px;cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;transition:background 0.1s}
+.model-suggest-item:last-child{border-bottom:none}
+.model-suggest-item:hover{background:var(--surface2)}
+.model-suggest-name{font-size:13px;font-weight:700;color:var(--text)}
+.model-suggest-cat{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
 .suggestion-item{padding:11px 15px;cursor:pointer;border-bottom:1px solid var(--border);font-size:13px;transition:background 0.1s}
 .suggestion-item:last-child{border-bottom:none}
 .suggestion-item:hover{background:var(--surface2)}
@@ -188,6 +192,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 .wsb-car{background:rgba(79,142,247,0.12);color:var(--accent);border:1px solid rgba(79,142,247,0.25)}
 .wsb-bike{background:rgba(249,124,79,0.12);color:var(--accent3);border:1px solid rgba(249,124,79,0.25)}
 .wsb-both{background:rgba(34,217,138,0.1);color:var(--accent2);border:1px solid rgba(34,217,138,0.2)}
+.wsb-none{background:rgba(240,82,82,0.08);color:var(--danger);border:1px solid rgba(240,82,82,0.2)}
 .queue-status-section{margin-bottom:20px}
 .queue-status-header{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius-sm);margin-bottom:8px;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;border:1px solid var(--border)}
 .qss-waiting{background:rgba(245,200,66,0.06);border-color:rgba(245,200,66,0.2);color:var(--warn)}
@@ -225,33 +230,34 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 .loader-spinner{width:48px;height:48px;border:4px solid var(--surface2);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loader-text{color:var(--text2);font-size:13px;letter-spacing:0.8px}
-
-/* ── Customer Search / History ── */
-.cust-hist-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
-.cust-hist-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.cust-hist-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:17px;font-weight:800;color:#fff;flex-shrink:0}
-.cust-hist-name{font-size:16px;font-weight:800;color:var(--text)}
-.cust-hist-sub{font-size:12px;color:var(--text2);margin-top:2px}
-.cust-visit-item{padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
-.cust-visit-item:last-child{border-bottom:none}
-
-/* ── Ongoing pinned banner ── */
-.ongoing-pinned-banner{background:linear-gradient(90deg,rgba(79,142,247,0.1),rgba(79,142,247,0.04));border:1px solid rgba(79,142,247,0.3);border-radius:var(--radius-sm);padding:8px 14px;margin-bottom:10px;font-size:12px;font-weight:700;color:var(--accent);display:flex;align-items:center;gap:6px}
-
+/* Customer search */
+.cust-search-bar{display:flex;gap:10px;margin-bottom:20px}
+.cust-result-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.cust-result-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.cust-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;font-family:'Sora',sans-serif;flex-shrink:0}
+.cust-name{font-family:'Sora',sans-serif;font-size:18px;font-weight:800}
+.cust-phone{font-size:13px;color:var(--text2);margin-top:3px;font-family:'Space Mono',monospace}
+.cust-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.cust-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:center}
+.cust-stat-val{font-family:'Sora',sans-serif;font-size:26px;font-weight:800}
+.cust-stat-lbl{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:0.7px;margin-top:3px;font-weight:600}
+/* History vehicle toggle */
+.hist-vehicle-tabs{display:flex;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:11px;padding:4px;width:fit-content;margin-bottom:16px}
+.hv-tab{padding:7px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text2);border:none;background:transparent;transition:all 0.2s}
+.hv-tab.active{background:var(--surface);color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 @media(max-width:700px){.entry-grid{grid-template-columns:1fr}.stats-bar{grid-template-columns:1fr 1fr}.vehicle-types{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 14px;height:60px}.section{padding:16px}.admin-layout{grid-template-columns:1fr}.admin-sidebar{position:static;height:auto}.analytics-grid{grid-template-columns:1fr 1fr}.workers-grid{grid-template-columns:1fr}.nav-tab{padding:7px 12px;font-size:12px}.brand-sub{display:none}.logo-img{height:34px}}
 </style>
 </head>
 <body>
 <div class="loader-wrap" id="appLoader">
-  <img src="logo.png" style="height:70px;background:#fff;padding:10px 16px;border-radius:10px" alt="Easter Group">
   <div class="loader-spinner"></div>
   <div class="loader-text">Connecting to Easter Group cloud...</div>
 </div>
 
 <div class="topbar">
   <div class="logo-area">
-    <img src="logo.png" class="logo-img" alt="Easter Group">
+    <img src="logo.png" class="logo-img" alt="Easter Group" onerror="this.style.display='none'">
     <div>
       <div class="brand-name">Easter Car Wash</div>
       <div class="brand-sub">Easter Group · Management</div>
@@ -271,67 +277,76 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 
 <!-- CHECK IN -->
 <div class="section active" id="section-customer">
-  <!-- Customer Search Bar -->
-  <div class="card" style="margin-bottom:18px">
-    <div class="card-title">🔍 Customer History Search</div>
-    <div style="display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap">
-      <div style="flex:1;min-width:220px;position:relative">
-        <input type="text" class="field-input" id="custSearchInput" placeholder="Search by name or mobile number…" oninput="handleCustomerSearch(this.value)" autocomplete="off">
-        <div class="suggestions-box" id="sug-custSearch" style="z-index:60"></div>
-      </div>
-      <button class="btn btn-ghost btn-sm" onclick="clearCustomerSearch()">Clear</button>
-    </div>
-    <div id="custHistResults" style="margin-top:16px;display:none"></div>
-  </div>
-
   <div style="display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start" id="checkinGrid">
     <div class="card">
       <div class="card-title">🚗 New Vehicle Check-In</div>
       <div class="entry-grid">
-        <!-- Vehicle Number: force uppercase, numbers & letters only (no symbols) -->
+
+        <!-- Vehicle Number: force uppercase, alphanumeric only, no symbols -->
         <div class="field-group">
           <div class="field-label">Vehicle Number *</div>
-          <input type="text" class="field-input" id="inVehicleNum" placeholder="e.g. KL01AB1234" autocomplete="off"
+          <input type="text" class="field-input" id="inVehicleNum"
+            placeholder="e.g. KL01AB1234"
+            autocomplete="off"
+            inputmode="text"
             oninput="sanitizeVehicleNum(this);handleSuggest('vehicleNum',this.value);updatePositionPreview()"
-            style="text-transform:uppercase;letter-spacing:1px;font-family:'Space Mono',monospace">
-          <div style="font-size:10.5px;color:var(--text3);margin-top:3px">Letters and numbers only — no spaces or symbols</div>
+            style="text-transform:uppercase;letter-spacing:1.5px;font-family:'Space Mono',monospace;font-size:15px;font-weight:700">
+          <div style="font-size:10px;color:var(--text3);margin-top:3px">Letters and numbers only. No spaces or symbols.</div>
           <div class="suggestions-box" id="sug-vehicleNum"></div>
         </div>
-        <!-- Phone: numbers only -->
+
+        <!-- Phone: numeric only -->
         <div class="field-group">
           <div class="field-label">Phone Number *</div>
-          <input type="tel" class="field-input" id="inPhone" placeholder="e.g. 9876543210" autocomplete="off"
-            oninput="sanitizePhone(this);handleSuggest('phone',this.value)"
-            inputmode="numeric" maxlength="10">
+          <input type="text" class="field-input" id="inPhone"
+            placeholder="e.g. 9876543210"
+            autocomplete="off"
+            inputmode="numeric"
+            maxlength="15"
+            oninput="sanitizePhone(this);handleSuggest('phone',this.value);validatePhone(this)"
+            onkeypress="return /[0-9+]/.test(event.key)">
+          <div id="phoneLenHint" style="display:none;font-size:11px;margin-top:4px;color:var(--danger);font-weight:600"></div>
           <div class="suggestions-box" id="sug-phone"></div>
         </div>
+
         <div class="field-group">
           <div class="field-label">Customer Name</div>
           <input type="text" class="field-input" id="inName" placeholder="Optional">
         </div>
 
-        <!-- Vehicle category selector (Car / Bike) shown FIRST, then model field adapts -->
+        <!-- Vehicle type selector (Cars / Bikes) -->
         <div class="full-col">
           <div class="field-label" style="margin-bottom:11px">Vehicle Category *</div>
-          <div style="display:flex;gap:10px">
-            <div class="type-btn" id="catBtnCar" onclick="selectMainCategory('car',this)" style="flex:1">
-              <div class="t-icon">🚗</div><div class="t-name">Car / SUV</div><div class="t-price" style="color:var(--text2);font-size:10px">Type 1–4</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="mainCatSel">
+            <div class="type-btn" id="mainCatCar" onclick="selectMainCategory('car',this)">
+              <div class="t-icon">🚗</div>
+              <div class="t-name">Car / SUV</div>
+              <div class="t-price" style="color:var(--text2);font-size:10px">Type 1–4 pricing</div>
             </div>
-            <div class="type-btn" id="catBtnBike" onclick="selectMainCategory('bike',this)" style="flex:1">
-              <div class="t-icon">🏍️</div><div class="t-name">Bike / Superbike</div><div class="t-price" style="color:var(--text2);font-size:10px">Regular & Super</div>
+            <div class="type-btn" id="mainCatBike" onclick="selectMainCategory('bike',this)">
+              <div class="t-icon">🏍️</div>
+              <div class="t-name">Bike / Superbike</div>
+              <div class="t-price" style="color:var(--text2);font-size:10px">Foam Wash only</div>
             </div>
           </div>
         </div>
 
-        <!-- Vehicle Model: shown for cars (required), shown for bikes (optional) -->
-        <div class="field-group full-col" id="modelFieldWrap" style="display:none">
+        <!-- Vehicle Model — shown for Cars (required), optional for Bikes -->
+        <div class="full-col field-group" id="modelFieldSection" style="display:none;position:relative">
           <div class="field-label" id="modelFieldLabel">Vehicle Model *</div>
-          <input type="text" class="field-input" id="inModel" placeholder="e.g. Swift, City, Royal Enfield…" autocomplete="off" oninput="handleModelInput(this.value)">
+          <input type="text" class="field-input" id="inModel"
+            placeholder="e.g. Swift, City, Royal Enfield…"
+            autocomplete="off"
+            oninput="handleModelInput(this.value);showModelSuggestions(this.value)"
+            onkeydown="modelSuggestKeyNav(event)"
+            onfocus="showModelSuggestions(this.value)"
+            onblur="autoFillModelOnBlur(this)">
+          <div id="modelSuggestBox" class="model-suggest-box"></div>
           <div id="modelDetectBadge" style="display:none;margin-top:8px;padding:10px 14px;border-radius:9px;font-size:13px;font-weight:700;border:1px solid"></div>
-          <div id="modelNotFound" style="display:none;margin-top:8px;padding:10px 14px;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.25);border-radius:9px;font-size:12px;color:var(--warn)">⚠️ Model not found — please select category manually below</div>
+          <div id="modelNotFound" style="display:none;margin-top:8px;padding:10px 14px;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.25);border-radius:9px;font-size:12px;color:var(--warn)">⚠️ Model not found — select category manually below</div>
         </div>
 
-        <!-- Manual category selector for cars (shown when model not found) -->
+        <!-- Manual override for cars only -->
         <div class="full-col" id="manualCatSection" style="display:none">
           <div class="field-label" style="margin-bottom:11px">Select Car Category Manually *</div>
           <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px" id="manualCatSel">
@@ -342,19 +357,29 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
           </div>
         </div>
 
-        <!-- Manual bike sub-category selector -->
-        <div class="full-col" id="manualBikeCatSection" style="display:none">
-          <div class="field-label" style="margin-bottom:11px">Select Bike Category *</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="manualBikeCatSel">
-            <div class="type-btn" onclick="selectManualCat('bike',this)"><div class="t-icon">🏍️</div><div class="t-name">Bike</div><div class="t-price" style="color:var(--text2);font-size:10px">Normal ₹130 / Foam ₹150</div></div>
-            <div class="type-btn" onclick="selectManualCat('superbike',this)"><div class="t-icon">🏍️</div><div class="t-name">Superbike</div><div class="t-price" style="color:var(--text2);font-size:10px">Normal ₹140 / Foam ₹170</div></div>
+        <!-- Bike sub-category (shown when bike selected) -->
+        <div class="full-col" id="bikeCatSection" style="display:none">
+          <div class="field-label" style="margin-bottom:11px">Bike Type *</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="bikeCatSel">
+            <div class="type-btn" onclick="selectBikeCat('bike',this)">
+              <div class="t-icon">🏍️</div>
+              <div class="t-name">Bike</div>
+              <div class="t-price" style="color:var(--accent2)">Foam ₹130</div>
+            </div>
+            <div class="type-btn" onclick="selectBikeCat('superbike',this)">
+              <div class="t-icon">🏍️</div>
+              <div class="t-name">Superbike</div>
+              <div class="t-price" style="color:var(--accent2)">Foam ₹140</div>
+            </div>
           </div>
+          <div style="margin-top:8px;padding:10px 14px;background:rgba(249,124,79,0.1);border:1px solid rgba(249,124,79,0.25);border-radius:8px;font-size:12px;color:var(--accent3)">🏍️ All bikes use <strong>Foam Wash (Body Wash)</strong> only</div>
         </div>
 
+        <!-- Wash type — shown for cars only -->
         <div class="full-col" id="washTypeSection" style="display:none">
           <div class="field-label" style="margin-bottom:11px">Wash Type *</div>
           <div class="wash-types" id="washTypeSel">
-            <div class="type-btn wash-btn" onclick="selectWashType('normal',this)">
+            <div class="type-btn wash-btn" id="normalWashBtn" onclick="selectWashType('normal',this)">
               <div class="t-icon">💧</div><div class="t-name">Normal Wash</div><div class="t-price" id="wash-normal-display" style="color:var(--warn)">—</div>
             </div>
             <div class="type-btn wash-btn" onclick="selectWashType('foam',this)" id="foamWashBtn">
@@ -362,6 +387,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
             </div>
           </div>
         </div>
+
         <div class="full-col">
           <div class="field-label" style="margin-bottom:11px">Amount</div>
           <div class="payment-toggle" style="margin-bottom:12px">
@@ -371,6 +397,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
           <div id="manualAmtWrap" style="display:none"><input type="number" class="field-input" id="inManualAmt" placeholder="Enter amount in ₹"></div>
           <div id="autoAmtWrap"><div class="calc-box"><span class="calc-label">Calculated Amount</span><span class="calc-val" id="calcAmount">₹0</span></div></div>
         </div>
+
         <div class="full-col">
           <div class="field-label" style="margin-bottom:11px">Payment Status *</div>
           <div class="pay-status-group">
@@ -384,13 +411,23 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
             </div>
           </div>
         </div>
+
         <div class="full-col" style="display:flex;gap:12px;justify-content:flex-end;padding-top:4px;flex-wrap:wrap">
           <button class="btn btn-ghost" onclick="clearForm()">Clear</button>
           <button class="btn btn-primary" onclick="addToQueue()">➕ Add to Queue</button>
         </div>
       </div>
     </div>
+
     <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card">
+        <div class="card-title">🔍 Customer Search</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input type="text" class="field-input" id="custSearchInput" placeholder="Search name or mobile…" oninput="searchCustomer(this.value)" style="flex:1">
+          <button class="btn btn-ghost btn-sm" onclick="clearCustSearch()">✕</button>
+        </div>
+        <div id="custSearchResults"></div>
+      </div>
       <div class="card">
         <div class="card-title">📍 Queue Position</div>
         <div class="position-display">
@@ -415,7 +452,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 <div class="section" id="section-queue">
   <div class="section-head">
     <h2>📋 Live Queue</h2>
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <div style="display:flex;gap:10px;align-items:center">
       <span style="font-size:13px;color:var(--text2);font-weight:600">Status:</span>
       <select class="field-input" style="width:auto;padding:8px 13px;font-size:13px" onchange="filterQueue(this.value)">
         <option value="all">All</option>
@@ -449,7 +486,9 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 <!-- ADMIN -->
 <div class="section" id="section-admin">
   <div id="adminLogin" class="admin-login card">
-    <div class="admin-login-logo"><img src="logo.png" alt="Easter Group"></div>
+    <div class="admin-login-logo">
+      <img src="logo.png" alt="Easter Group" onerror="this.style.display='none'">
+    </div>
     <div class="card-title" style="justify-content:center;text-align:center">🔐 Admin Access</div>
     <div style="display:flex;flex-direction:column;gap:14px">
       <div class="field-group"><div class="field-label">Email</div><input type="email" class="field-input" id="adminEmail" placeholder="admin@eastercarwash.com"></div>
@@ -469,7 +508,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
       <div class="sidebar-item" onclick="showAdminTab('queue_admin',this)"><span class="si-icon">📋</span> Live Queue</div>
       <div class="sidebar-item" onclick="showAdminTab('history',this)"><span class="si-icon">🗂️</span> History</div>
       <div class="sidebar-item" onclick="showAdminTab('billing_admin',this)"><span class="si-icon">🧾</span> Billing</div>
-      <div class="sidebar-item" onclick="showAdminTab('cust_search_admin',this)"><span class="si-icon">🔍</span> Customer Search</div>
+      <div class="sidebar-item" onclick="showAdminTab('customers',this)"><span class="si-icon">👤</span> Customers</div>
       <div class="sidebar-label">Manage</div>
       <div class="sidebar-item" onclick="showAdminTab('workers',this)"><span class="si-icon">👷</span> Workers</div>
       <div class="sidebar-item" onclick="showAdminTab('attendance',this)"><span class="si-icon">📅</span> Attendance</div>
@@ -483,6 +522,7 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
       </div>
     </div>
     <div class="admin-content">
+      <!-- OVERVIEW -->
       <div class="admin-tab active" id="atab-overview">
         <div class="section-head"><h2>Overview</h2><div class="date-filter"><input type="date" id="filterDate" onchange="refreshAdminData()"></div></div>
         <div class="analytics-grid">
@@ -507,65 +547,108 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
           </div>
         </div>
       </div>
+      <!-- ANALYTICS -->
       <div class="admin-tab" id="atab-analytics"><div class="section-head"><h2>Analytics</h2></div><div id="analyticsContent"></div></div>
+      <!-- LIVE QUEUE ADMIN -->
       <div class="admin-tab" id="atab-queue_admin">
         <div class="section-head"><h2>Live Queue Management</h2></div>
         <div id="adminQueueList"></div>
       </div>
+      <!-- HISTORY with Car/Bike toggle -->
       <div class="admin-tab" id="atab-history">
-        <div class="section-head"><h2>Full History</h2>
+        <div class="section-head">
+          <h2>Full History</h2>
           <div class="date-filter">
             <input type="date" id="histDate" onchange="loadHistory()">
-            <input type="text" class="field-input" style="padding:8px 13px;font-size:13px" placeholder="Search vehicle/phone" id="histSearch" oninput="loadHistory()">
+            <input type="text" class="field-input" style="padding:8px 13px;font-size:13px" placeholder="Search vehicle/phone/name" id="histSearch" oninput="loadHistory()">
           </div>
         </div>
-        <!-- Vehicle toggle for history -->
-        <div style="margin-bottom:16px">
-          <div class="queue-vehicle-tabs">
-            <button class="qv-tab active" id="histTab-all" onclick="selectHistVehicleTab('all',this)">🚘 All <span class="qv-count" id="hqvc-all">0</span></button>
-            <button class="qv-tab" id="histTab-cars" onclick="selectHistVehicleTab('cars',this)">🚗 Cars <span class="qv-count" id="hqvc-cars">0</span></button>
-            <button class="qv-tab" id="histTab-bikes" onclick="selectHistVehicleTab('bikes',this)">🏍️ Bikes <span class="qv-count" id="hqvc-bikes">0</span></button>
-          </div>
+        <div class="hist-vehicle-tabs">
+          <button class="hv-tab active" id="hvTab-all" onclick="selectHistVehicleTab('all',this)">🚘 All</button>
+          <button class="hv-tab" id="hvTab-cars" onclick="selectHistVehicleTab('cars',this)">🚗 Cars</button>
+          <button class="hv-tab" id="hvTab-bikes" onclick="selectHistVehicleTab('bikes',this)">🏍️ Bikes</button>
         </div>
         <div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Vehicle</th><th>Name</th><th>Phone</th><th>Model</th><th>V-Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th><th>Entry</th><th>Done</th></tr></thead><tbody id="historyTable"></tbody></table></div>
       </div>
+      <!-- BILLING -->
       <div class="admin-tab" id="atab-billing_admin">
         <div class="section-head"><h2>Billing</h2><div class="date-filter"><input type="date" id="adminBillDate" onchange="loadAdminBilling()"></div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:20px">
           <div class="analytic-card"><div class="analytic-val" style="color:var(--accent2)" id="ab-revenue">₹0</div><div class="analytic-label">Total Revenue</div></div>
-          <div class="analytic-card"><div class="analytic-val" style="color:var(--accent)" id="ab-count">0</div><div class="analytic-label">Completed Washes</div></div>
+          <div class="analytic-card"><div class="analytic-val" style="color:var(--accent)" id="ab-count">0</div><div class="analytic-label">Completed</div></div>
           <div class="analytic-card"><div class="analytic-val" style="color:var(--purple)" id="ab-upi">₹0</div><div class="analytic-label">UPI</div></div>
           <div class="analytic-card"><div class="analytic-val" style="color:var(--warn)" id="ab-cash">₹0</div><div class="analytic-label">Cash</div></div>
         </div>
         <div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Vehicle</th><th>Customer</th><th>Model</th><th>V-Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th><th>Entry</th><th>Done</th><th>Bill</th></tr></thead><tbody id="adminBillingTable"></tbody></table></div>
       </div>
-      <!-- Customer Search Admin Tab -->
-      <div class="admin-tab" id="atab-cust_search_admin">
-        <div class="section-head"><h2>🔍 Customer Search</h2></div>
-        <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
-          <div style="flex:1;min-width:240px">
-            <input type="text" class="field-input" id="adminCustSearchInput" placeholder="Search by name or mobile number…" oninput="handleAdminCustomerSearch(this.value)">
-          </div>
-          <button class="btn btn-ghost btn-sm" onclick="clearAdminCustomerSearch()">Clear</button>
+      <!-- CUSTOMERS -->
+      <div class="admin-tab" id="atab-customers">
+        <div class="section-head"><h2>👤 Customer Lookup</h2></div>
+        <div style="display:flex;gap:10px;margin-bottom:20px">
+          <input type="text" class="field-input" id="adminCustSearch" placeholder="Search by name or mobile number…" oninput="adminSearchCustomer(this.value)" style="max-width:400px">
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('adminCustSearch').value='';adminSearchCustomer('')">✕ Clear</button>
         </div>
-        <div id="adminCustHistResults"></div>
+        <div id="adminCustResults"></div>
       </div>
+      <!-- WORKERS -->
       <div class="admin-tab" id="atab-workers">
         <div class="section-head"><h2>Workers</h2><button class="btn btn-primary btn-sm" onclick="showAddWorker()">➕ Add Worker</button></div>
         <div class="workers-grid" id="workersGrid"></div>
       </div>
+      <!-- ATTENDANCE -->
       <div class="admin-tab" id="atab-attendance">
         <div class="section-head"><h2>Attendance</h2><div class="date-filter"><input type="date" id="attDate" onchange="loadAttendance()"><button class="btn btn-success btn-sm" onclick="markAllPresent()">✅ Mark All Present</button></div></div>
-        <div class="table-wrap"><table class="data-table"><thead><tr><th>Worker</th><th>Role</th><th>Check In</th><th>Check Out</th><th>Status</th><th>Action</th></tr></thead><tbody id="attendanceTable"></tbody></table></div>
+        <div class="table-wrap"><table class="data-table"><thead><tr><th>Worker</th><th>Role</th><th>Today's Section</th><th>Check In</th><th>Check Out</th><th>Status</th><th>Action</th></tr></thead><tbody id="attendanceTable"></tbody></table></div>
       </div>
+      <!-- PRICING -->
       <div class="admin-tab" id="atab-pricing">
         <div class="section-head"><h2>Service Pricing</h2></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-          <div class="card"><div class="card-title">💧 Normal Wash Prices</div><div class="price-grid" id="normalPriceGrid"></div></div>
-          <div class="card"><div class="card-title">🫧 Foam Wash Prices</div><div class="price-grid" id="foamPriceGrid"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+          <div class="card"><div class="card-title">💧 Normal Wash Prices (Cars only)</div><div class="price-grid" id="normalPriceGrid"></div></div>
+          <div class="card"><div class="card-title">🫧 Foam Wash Prices</div><div class="price-grid" id="foamPriceGrid"></div><div style="margin-top:10px;font-size:12px;color:var(--accent3);padding:8px;background:rgba(249,124,79,0.08);border-radius:8px">🏍️ Bikes use Foam Wash only — edit price in Foam column</div></div>
         </div>
-        <div style="margin-top:16px;display:flex;justify-content:flex-end"><button class="btn btn-success" onclick="savePricing()">💾 Save Pricing</button></div>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:24px"><button class="btn btn-success" onclick="savePricing()">💾 Save Pricing</button></div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title" style="cursor:pointer;justify-content:space-between" onclick="toggleModelBrowser()">
+            <span>📋 All Registered Models</span>
+            <span id="modelBrowserToggleIcon" style="font-size:12px;color:var(--text2)">▼ Show</span>
+          </div>
+          <div id="modelBrowserWrap" style="display:none">
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+              <input type="text" class="field-input" id="modelBrowserSearch" placeholder="🔍 Search model…" oninput="renderBuiltinModels()" style="max-width:260px;padding:8px 13px">
+              <div style="display:flex;gap:6px;flex-wrap:wrap" id="modelBrowserCatFilter">
+                <button class="btn btn-sm btn-ghost mbf-btn active" data-cat="all" onclick="setModelBrowserCat('all',this)">All</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="type1" onclick="setModelBrowserCat('type1',this)" style="color:var(--accent)">🚗 T1</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="type2" onclick="setModelBrowserCat('type2',this)" style="color:var(--purple)">🚗 T2</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="type3" onclick="setModelBrowserCat('type3',this)" style="color:var(--accent3)">🚙 T3</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="type4" onclick="setModelBrowserCat('type4',this)" style="color:var(--accent2)">🚙 T4</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="bike" onclick="setModelBrowserCat('bike',this)" style="color:var(--warn)">🏍️ Bike</button>
+                <button class="btn btn-sm btn-ghost mbf-btn" data-cat="superbike" onclick="setModelBrowserCat('superbike',this)" style="color:var(--brand)">🏍️ Superbike</button>
+              </div>
+            </div>
+            <div id="builtinModelsList"></div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-title">➕ Add New Vehicle Model</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;margin-bottom:16px">
+            <div class="field-group"><div class="field-label">Model Name</div><input type="text" class="field-input" id="newModelName" placeholder="e.g. Tata Punch EV" autocomplete="off" style="text-transform:uppercase"></div>
+            <div class="field-group"><div class="field-label">Category</div>
+              <select class="field-input" id="newModelCat">
+                <option value="type1">🚗 Type 1 Car</option>
+                <option value="type2">🚗 Type 2 Car</option>
+                <option value="type3">🚙 Type 3 SUV</option>
+                <option value="type4">🚙 Type 4 SUV</option>
+                <option value="bike">🏍️ Bike</option>
+                <option value="superbike">🏍️ Superbike</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="addCustomModel()" style="white-space:nowrap">➕ Add</button>
+          </div>
+          <div id="customModelsList"></div>
+        </div>
       </div>
+      <!-- SETTINGS -->
       <div class="admin-tab" id="atab-settings">
         <div class="section-head"><h2>Settings</h2></div>
         <div class="card" style="margin-bottom:16px">
@@ -594,26 +677,75 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
 
 <div id="toast-container"></div>
 
-<!-- ADD WORKER MODAL -->
+<!-- WORKER MODAL -->
 <div id="workerModal" class="modal-overlay" style="display:none">
   <div class="modal-box">
-    <div class="modal-title">Add Worker</div>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div class="field-group"><div class="field-label">Full Name</div><input type="text" class="field-input" id="wName" placeholder="Worker name"></div>
+    <div class="modal-title" id="workerModalTitle">➕ Add Worker</div>
+    <input type="hidden" id="wEditId">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="field-group"><div class="field-label">Full Name *</div><input type="text" class="field-input" id="wName" placeholder="Worker name"></div>
       <div class="field-group"><div class="field-label">Role</div><input type="text" class="field-input" id="wRole" placeholder="e.g. Washer, Supervisor"></div>
       <div class="field-group"><div class="field-label">Phone</div><input type="text" class="field-input" id="wPhone" placeholder="Phone number"></div>
       <div class="field-group">
-        <div class="field-label">Works In Section</div>
-        <div style="display:flex;gap:8px;margin-top:4px">
-          <div class="pay-method-btn" id="wSecCar" onclick="selectWorkerSection('car',this)" style="flex:1;padding:11px 10px;cursor:pointer">🚗 Car Section</div>
-          <div class="pay-method-btn" id="wSecBike" onclick="selectWorkerSection('bike',this)" style="flex:1;padding:11px 10px;cursor:pointer">🏍️ Bike Section</div>
-          <div class="pay-method-btn" id="wSecBoth" onclick="selectWorkerSection('both',this)" style="flex:1;padding:11px 10px;cursor:pointer">🔄 Both</div>
+        <div class="field-label" style="margin-bottom:8px">Default Section *</div>
+        <div style="display:flex;gap:8px">
+          <div class="pay-method-btn" id="wSecCar" onclick="selectWorkerSection('car',this)" style="flex:1;padding:11px 10px;cursor:pointer;text-align:center">🚗 Car</div>
+          <div class="pay-method-btn" id="wSecBike" onclick="selectWorkerSection('bike',this)" style="flex:1;padding:11px 10px;cursor:pointer;text-align:center">🏍️ Bike</div>
+          <div class="pay-method-btn" id="wSecBoth" onclick="selectWorkerSection('both',this)" style="flex:1;padding:11px 10px;cursor:pointer;text-align:center">🔄 Both</div>
         </div>
       </div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost btn-sm" onclick="closeWorkerModal()">Cancel</button>
-      <button class="btn btn-primary btn-sm" onclick="saveWorker()">Add Worker</button>
+      <button class="btn btn-primary btn-sm" id="workerSaveBtn" onclick="saveWorker()">Add Worker</button>
+    </div>
+  </div>
+</div>
+
+<!-- DAILY SECTION MODAL -->
+<div id="dailySectionModal" class="modal-overlay" style="display:none">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-title">📋 Update Today's Section</div>
+    <input type="hidden" id="dsmWorkerId">
+    <div style="margin-bottom:6px;font-size:13px;color:var(--text2)" id="dsmWorkerName"></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="pay-method-btn" id="dsmCar" onclick="selectDSM('car')" style="padding:14px;cursor:pointer;text-align:center;font-size:14px">🚗 Car Section</div>
+      <div class="pay-method-btn" id="dsmBike" onclick="selectDSM('bike')" style="padding:14px;cursor:pointer;text-align:center;font-size:14px">🏍️ Bike Section</div>
+      <div class="pay-method-btn" id="dsmBoth" onclick="selectDSM('both')" style="padding:14px;cursor:pointer;text-align:center;font-size:14px">🔄 Both Sections</div>
+      <div class="pay-method-btn" id="dsmNone" onclick="selectDSM('none')" style="padding:14px;cursor:pointer;text-align:center;font-size:14px;border-color:var(--danger);color:var(--danger)">✗ Not Working Today</div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('dailySectionModal').style.display='none'">Cancel</button>
+      <button class="btn btn-success btn-sm" onclick="saveDailySection()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODEL EDIT MODAL -->
+<div id="modelEditModal" class="modal-overlay" style="display:none">
+  <div class="modal-box" style="max-width:400px">
+    <div class="modal-title">✏️ Edit Model</div>
+    <input type="hidden" id="modelEditOriginal">
+    <div id="modelEditBuiltinNote" style="display:none;margin-bottom:14px;padding:10px 13px;background:rgba(245,200,66,0.08);border:1px solid rgba(245,200,66,0.2);border-radius:9px;font-size:12px;color:var(--warn)">⚡ Built-in model. Changes saved as overrides.</div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="field-group"><div class="field-label">Model Name</div><input type="text" class="field-input" id="modelEditNameInput" placeholder="Model name" style="text-transform:uppercase;font-weight:700"></div>
+      <div class="field-group"><div class="field-label">Category</div>
+        <select class="field-input" id="modelEditCat">
+          <option value="type1">🚗 Type 1 Car</option>
+          <option value="type2">🚗 Type 2 Car</option>
+          <option value="type3">🚙 Type 3 SUV</option>
+          <option value="type4">🚙 Type 4 SUV</option>
+          <option value="bike">🏍️ Bike</option>
+          <option value="superbike">🏍️ Superbike</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions" style="justify-content:space-between">
+      <button class="btn btn-danger btn-sm" onclick="deleteModelEntry()">🗑️ Delete</button>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('modelEditModal').style.display='none'">Cancel</button>
+        <button class="btn btn-primary btn-sm" onclick="saveModelEdit()">💾 Save</button>
+      </div>
     </div>
   </div>
 </div>
@@ -623,20 +755,18 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
   <div class="modal-box" style="max-width:520px">
     <div class="modal-title">✏️ Edit Entry</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div class="field-group"><div class="field-label">Vehicle Number</div><input type="text" class="field-input" id="editVehicleNum" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')"></div>
-      <div class="field-group"><div class="field-label">Phone</div><input type="text" class="field-input" id="editPhone" oninput="this.value=this.value.replace(/\D/g,'')"></div>
+      <div class="field-group"><div class="field-label">Vehicle Number</div><input type="text" class="field-input" id="editVehicleNum"></div>
+      <div class="field-group"><div class="field-label">Phone</div><input type="text" class="field-input" id="editPhone"></div>
       <div class="field-group"><div class="field-label">Customer Name</div><input type="text" class="field-input" id="editName"></div>
       <div class="field-group"><div class="field-label">Model</div><input type="text" class="field-input" id="editModel"></div>
       <div class="field-group"><div class="field-label">Amount (₹)</div><input type="number" class="field-input" id="editAmount"></div>
-      <div class="field-group">
-        <div class="field-label">Payment Status</div>
+      <div class="field-group"><div class="field-label">Payment Status</div>
         <select class="field-input" id="editPayStatus">
           <option value="unpaid">Unpaid</option>
           <option value="paid">Paid</option>
         </select>
       </div>
-      <div class="field-group" style="grid-column:1/-1">
-        <div class="field-label">Payment Method</div>
+      <div class="field-group" style="grid-column:1/-1"><div class="field-label">Payment Method</div>
         <select class="field-input" id="editPayMethod">
           <option value="">— Not specified —</option>
           <option value="upi">📱 UPI</option>
@@ -662,27 +792,46 @@ body.light .logo-img{background:#fff;border-color:var(--border)}
   </div>
 </div>
 
-<script src="config.js"></script>
+<!-- CUSTOMER HISTORY MODAL -->
+<div id="custHistModal" class="modal-overlay" style="display:none">
+  <div class="modal-box" style="max-width:600px">
+    <div class="modal-title" id="custHistTitle">Customer History</div>
+    <div id="custHistContent"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('custHistModal').style.display='none'">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js" onerror="console.warn('config.js not found — Firebase disabled')"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
 /* ============================================================
-   EASTER CAR WASH — Improved v2
+   EASTER CAR WASH — Updated Management System
+   All requested changes implemented:
+   1. Vehicle No: uppercase + alphanumeric only
+   2. Phone: numeric only
+   3. Model field: conditional based on car/bike
+   4. Auto-complete fills on blur
+   5. Bikes: foam only, under foam pricing
+   6. Queue: Ongoing first, then Waiting
+   7. Customer search with full history
+   8. History: car/bike tabs
+   9. PDF: separate car/bike sections with totals
    ============================================================ */
 
 let fbApp, fbAuth, fbDB;
 try {
-  if (!window.__ECW_RT__) throw new Error('Configuration missing');
-  fbApp = firebase.initializeApp(window.__ECW_RT__);
-  fbAuth = firebase.auth();
-  fbDB = firebase.database();
-  try { delete window.__ECW_RT__; } catch(e) {}
-} catch (e) {
-  console.error('Firebase init failed:', e);
-  alert('Unable to connect to cloud. Please check your internet connection.');
-}
+  if (window.__ECW_RT__) {
+    fbApp = firebase.initializeApp(window.__ECW_RT__);
+    fbAuth = firebase.auth();
+    fbDB = firebase.database();
+    try { delete window.__ECW_RT__; } catch(e){}
+  }
+} catch(e) { console.warn('Firebase init failed:', e); }
 
 let DB = {
   queue: [], history: [], workers: [], attendance: {},
@@ -691,36 +840,100 @@ let DB = {
     type2:  { normal:270, foam:320 },
     type3:  { normal:320, foam:400 },
     type4:  { normal:350, foam:400 },
-    bike:   { normal:130, foam:150 },
-    superbike: { normal:140, foam:170 }
+    bike:   { normal:130, foam:130 },
+    superbike: { normal:140, foam:140 }
   },
   timeConfig: { normal:15, foam:25 },
-  nextId: 1
+  nextId: 1, customModels: {}, deletedModels: {}
 };
 
-let adminLoggedIn = false, isLight = false;
-let selectedVehicleType = '', selectedWashType = '', payMode = 'auto', editingId = null;
-let mainCategory = ''; // 'car' | 'bike'
-let queueFilter = 'all', queuePayFilter = 'all', queueVehicleTab = 'all';
-let histVehicleTab = 'all';
-let selectedPayStatus = '', selectedPayMethod = '', selectedWorkerSection = '';
+let isAuthReady=false, adminLoggedIn=false, isLight=false;
+let selectedMainCat=''; // 'car' | 'bike'
+let selectedVehicleType='', selectedWashType='', payMode='auto', editingId=null;
+let queueFilter='all', queuePayFilter='all', queueVehicleTab='all';
+let selectedPayStatus='', selectedPayMethod='', selectedWorkerSection='';
+let histVehicleTab='all';
 
-/* ── Model → category lookup ── */
+/* ── Input sanitizers ── */
+function sanitizeVehicleNum(el) {
+  // Remove everything except letters and digits, force uppercase
+  const pos = el.selectionStart;
+  const clean = el.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+  if (el.value !== clean) {
+    el.value = clean;
+    // restore caret
+    try { el.setSelectionRange(Math.max(0,pos-1), Math.max(0,pos-1)); } catch(e){}
+  }
+}
+
+function sanitizePhone(el) {
+  // Allow digits and leading + only
+  const clean = el.value.replace(/[^0-9+]/g, '').replace(/(?!^)\+/g, '');
+  if (el.value !== clean) el.value = clean;
+}
+
+/* ── Main category selector (Car vs Bike) ── */
+function selectMainCategory(cat, el) {
+  selectedMainCat = cat;
+  // Reset derived state
+  selectedVehicleType=''; selectedWashType='';
+  document.querySelectorAll('#mainCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  // Show/hide model field
+  const modelSec = document.getElementById('modelFieldSection');
+  const modelLabel = document.getElementById('modelFieldLabel');
+  modelSec.style.display = 'block';
+  if (cat === 'car') {
+    modelLabel.textContent = 'Vehicle Model *';
+    document.getElementById('inModel').placeholder = 'e.g. Swift, City, Innova…';
+  } else {
+    modelLabel.textContent = 'Vehicle Model (Optional)';
+    document.getElementById('inModel').placeholder = 'e.g. Royal Enfield, Apache, Activa…';
+  }
+  // Show/hide sections
+  document.getElementById('bikeCatSection').style.display = cat === 'bike' ? 'block' : 'none';
+  document.getElementById('washTypeSection').style.display = 'none';
+  document.getElementById('manualCatSection').style.display = 'none';
+  document.getElementById('modelDetectBadge').style.display = 'none';
+  document.getElementById('modelNotFound').style.display = 'none';
+  document.querySelectorAll('#bikeCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('#manualCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  document.querySelectorAll('#washTypeSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  // If bike: auto-set wash to foam, clear model suggestions
+  if (cat === 'bike') {
+    document.getElementById('inModel').value = '';
+    // Try to detect from existing model input
+  }
+  updateCalcAmount(); updatePositionPreview();
+}
+
+function selectBikeCat(cat, el) {
+  selectedVehicleType = cat; // 'bike' | 'superbike'
+  selectedWashType = 'foam'; // bikes are always foam
+  document.querySelectorAll('#bikeCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  updateCalcAmount(); updatePositionPreview();
+}
+
+/* ── Model autocomplete ── */
 const MODEL_MAP = (function(){
   const t1=['ALTO','ALTROZ','BALLENO','BEAT','BRIO','CELERIO','COMET','EON','FIGO','FRONX','GLANZA','GO','I10','I20','IGNIS','INDICA','JAZZ','KWID','LIVA','MICRA','OMNI','POLO','PUNTO','REDI GO','REDIGO','RITZ','SANTRO','SPARK','S-PRESSO','SPRESSO','SWIFT','TIAGO','WAGAN R','WAGANR','WR-V','WRV'];
   const t2=['ACCENT','AMAZE','AMBASSADOR','AMEO','AURA','AVEO','CAMERY','CIAZ','CITY','COROLLA','CRUZE','RRCO','ELANTRA','ETIOS','EXTER','FIESTA','GO+','GOPLUST','IKON','INDIGO','KICKS','KIGER','KUV','LINEA','LOGAN','MAGNITE','NEXON','OCTAVIA','OPTRA','PUNCH','RAPID','SAIL','SLAVIA','SUNNY','SUPERB','SWIFT OZIRE','SWIFTDZIRE','DZIRE','TIGOR','VENTO','VERITO','VERNA','VIRTUS','XCENT','YARIS'];
   const t3=['ASTOR','AUDI','BENZ','BMW','BREZZA','CAPTUR','CITROEN C3','CITROENC3','COMPASS','CRETA','DUSTER','ECOSPORT','ELEVATE','ENJOY','ERTIGA','IQNIQ S','IQNIQS','JAGUAR','JIMNY','KODIAQ','RUMION','S-CROSS','SCROSS','KIA SELTOS','KIASELTOS','SELTOS','T ROC','TROC','TERRANO','THAR','TIGUAN','TRIBER','TUCSON','TUV 300','TUV300','URBAN CRUISER','URBANCRUISER','VENUE','VOLVO','XL6','XUV 300','XUV300','XUV 400','XUV400','ZS','GRAND VITARA','GRANDVITARA'];
-  const t4=['ALCAZAR','ALTURAS','AUDI SUV','AUDISUV','BENZ SUV','BENZSUV','BMW SUV','BMWSUV','BOLERO','BYD','BRV','CS AIRCROSS','CSAIRCROSS','CARENS','CARNIVAL','CRV','CR-V','ENDEAVOUR','FORTUNER','GLOSTER','HARRIER','HECTOR','HEXA','INNOVA','INVICTO','ISUZU','JAGUAR SUV','JAGUARSUV','JEEP','MARAZZO','MOBILIO','QUALIS','SAFARI','SCORPIO','TAVERA','XUV 500','XUV500','XUV 700','XUV700'];
+  const t4=['ALCAZAR','ALTURAS','AUDI SUV','AUDISUV','BENZ SUV','BENZSUV','BMW SUV','BMWSUV','BOLERO','BYD','BRV','CS AIRCROSS','CSAIRCROSS','CARENS','CARNIVAL','CRV','CR-V','ENDEAVOUR','FORTUNER','GLOSTER','HARRIER','HECTOR','HEXA','INNOVA','INVICTO','ISUZU','JAGUAR SUV','JAGUARSUV','JEEP','JEEP WRANGLER','MARAZZO','MOBILIO','QUALIS','SAFARI','SCORPIO','TAVERA','VOLVO SUV','VOLVUSUV','XUV 500','XUV500','XUV 700','XUV700'];
   const bikes=['TWO WHEELER','TWOWHEELER','ACTIVA','ACCESS','JUPITER','NTORQ','PLEASURE','SCOOTY','APACHE','CB','CBF','UNICORN','SHINE','SPLENDOR','PULSAR','PLATINA','BOXER','DISCOVER','AVENGER','CT100','HF DELUXE','HFDELUXE','FZ','R15','MT15','FAZER','SALUTO','GLADIATOR','PASSION','GLAMOUR','MAESTRO','DUET'];
   const sbikes=['ROYAL ENFIELD','ROYALENFIELD','JAWA','HARLEY','HARLEY DAVIDSON','HARLEYDAVIDSON','HONDA HNESS','HONDAHNESS','H\'NESS','HNESS','SUPER BIKE','SUPERBIKE','HAYABUSA','NINJA','KTM','DUKE','ADVENTURE','R1','CBR','DOMINAR','INTERCEPTOR','METEOR','HUNTER','BULLET','THUNDERBIRD','HIMALAYAN'];
   const map={};
-  t1.forEach(m=>map[m.toUpperCase()]='type1'); t2.forEach(m=>map[m.toUpperCase()]='type2');
-  t3.forEach(m=>map[m.toUpperCase()]='type3'); t4.forEach(m=>map[m.toUpperCase()]='type4');
-  bikes.forEach(m=>map[m.toUpperCase()]='bike'); sbikes.forEach(m=>map[m.toUpperCase()]='superbike');
+  t1.forEach(m=>map[m.toUpperCase()]='type1');
+  t2.forEach(m=>map[m.toUpperCase()]='type2');
+  t3.forEach(m=>map[m.toUpperCase()]='type3');
+  t4.forEach(m=>map[m.toUpperCase()]='type4');
+  bikes.forEach(m=>map[m.toUpperCase()]='bike');
+  sbikes.forEach(m=>map[m.toUpperCase()]='superbike');
   return map;
 })();
 
-const CAT_META = {
+const CAT_META={
   type1:{label:'Type 1 Car',icon:'🚗',color:'var(--accent)',isBike:false},
   type2:{label:'Type 2 Car',icon:'🚗',color:'var(--purple)',isBike:false},
   type3:{label:'Type 3 SUV',icon:'🚙',color:'var(--accent3)',isBike:false},
@@ -729,333 +942,133 @@ const CAT_META = {
   superbike:{label:'Superbike',icon:'🏍️',color:'var(--brand)',isBike:true}
 };
 
-function isBikeType(t){ return CAT_META[t]?.isBike === true; }
+function getAllModels(){
+  const merged={};
+  const deleted=DB.deletedModels||{};
+  const custom=DB.customModels||{};
+  Object.entries(MODEL_MAP).forEach(([model,cat])=>{
+    const key=model.replace(/ /g,'_');
+    if(deleted[key]) return;
+    merged[model]=cat;
+  });
+  Object.entries(custom).forEach(([key,val])=>{
+    const model=key.replace(/_/g,' ');
+    if(typeof val==='string') merged[model]=val;
+  });
+  Object.keys(deleted).forEach(key=>{
+    const model=key.replace(/_/g,' ');
+    delete merged[model];
+  });
+  return merged;
+}
 
 function lookupModel(raw){
-  if(!raw)return null;
+  if(!raw) return null;
   const key=raw.trim().toUpperCase();
-  if(MODEL_MAP[key])return MODEL_MAP[key];
-  for(const[model,cat] of Object.entries(MODEL_MAP)){
-    if(model.startsWith(key)||key.startsWith(model))return cat;
+  const all=getAllModels();
+  if(all[key]) return all[key];
+  for(const [model,cat] of Object.entries(all)){
+    if(model.startsWith(key)||key.startsWith(model)) return cat;
   }
   return null;
 }
 
-/* ── Input sanitisation ── */
-function sanitizeVehicleNum(el){
-  // Allow only alphanumeric, uppercase
-  let v = el.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
-  el.value = v;
-}
-function sanitizePhone(el){
-  let v = el.value.replace(/\D/g,'');
-  el.value = v;
-}
-
-/* ── Main category selection (Car/Bike) ── */
-function selectMainCategory(cat, el){
-  mainCategory = cat;
-  // Reset sub-type
-  selectedVehicleType = ''; selectedWashType = '';
-  document.querySelectorAll('#catBtnCar,#catBtnBike').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-
-  // Show model field
-  const modelWrap = document.getElementById('modelFieldWrap');
-  modelWrap.style.display = 'block';
-  const modelLabel = document.getElementById('modelFieldLabel');
-
-  if(cat === 'car'){
-    modelLabel.textContent = 'Vehicle Model *';
-    // Show car manual cat section hidden until model not found
-    document.getElementById('manualCatSection').style.display = 'none';
-    document.getElementById('manualBikeCatSection').style.display = 'none';
-  } else {
-    modelLabel.textContent = 'Vehicle Model (Optional)';
-    // Show bike sub-category immediately
-    document.getElementById('manualCatSection').style.display = 'none';
-    document.getElementById('manualBikeCatSection').style.display = 'block';
-    document.getElementById('modelDetectBadge').style.display = 'none';
-    document.getElementById('modelNotFound').style.display = 'none';
-    document.getElementById('washTypeSection').style.display = 'none';
-  }
-  // Clear model field
-  document.getElementById('inModel').value = '';
-  document.getElementById('modelDetectBadge').style.display = 'none';
-  document.getElementById('modelNotFound').style.display = 'none';
-  updateCalcAmount(); updatePositionPreview();
-}
-
-function handleModelInput(raw){
-  if(mainCategory === 'bike'){
-    // For bikes: if user types a model, try to detect sub-type
-    if(raw.length >= 2){
-      const cat = lookupModel(raw);
-      if(cat && isBikeType(cat)){
-        applyCategory(cat);
-        // Highlight in the manual bike cat
-        document.querySelectorAll('#manualBikeCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
-      }
-    }
-    return;
-  }
-  // Car flow
-  if(raw.length < 2){
-    document.getElementById('modelDetectBadge').style.display='none';
-    document.getElementById('modelNotFound').style.display='none';
-    document.getElementById('manualCatSection').style.display='none';
-    document.getElementById('washTypeSection').style.display='none';
-    selectedVehicleType=''; selectedWashType='';
-    updateCalcAmount(); return;
-  }
-  const cat = lookupModel(raw);
-  if(cat && !isBikeType(cat)){
-    // Auto-complete model name on find
-    autoCompleteModel(raw);
-    applyCategory(cat);
-    document.getElementById('modelNotFound').style.display='none';
-    document.getElementById('manualCatSection').style.display='none';
-  } else if(cat && isBikeType(cat)){
-    // Typed a bike model while Car is selected
-    document.getElementById('modelNotFound').style.display='block';
-    document.getElementById('manualCatSection').style.display='block';
-    selectedVehicleType=''; selectedWashType=''; updateCalcAmount();
-  } else {
-    document.getElementById('modelDetectBadge').style.display='none';
-    document.getElementById('modelNotFound').style.display='block';
-    document.getElementById('manualCatSection').style.display='block';
-    document.getElementById('washTypeSection').style.display='none';
-    selectedVehicleType=''; selectedWashType=''; updateCalcAmount();
-  }
-}
-
-/* ── Auto-complete model to full name on blur ── */
-function autoCompleteModel(raw){
-  const key = raw.trim().toUpperCase();
-  // Find exact or best match key
-  let bestKey = null;
-  if(MODEL_MAP[key]) bestKey = key;
-  else {
-    for(const model of Object.keys(MODEL_MAP)){
-      if(model.startsWith(key)||key.startsWith(model)){ bestKey = model; break; }
+/* ── Auto-fill model name on blur (fix: auto-complete to full name) ── */
+function autoFillModelOnBlur(el) {
+  const raw = (el.value||'').trim();
+  if (raw.length < 2) return;
+  const key = raw.toUpperCase();
+  const all = getAllModels();
+  // Find best match that STARTS with what user typed
+  const matches = Object.keys(all).filter(m => m.startsWith(key));
+  if (matches.length === 1) {
+    // Exact single match — auto-fill
+    const full = matches[0];
+    const display = full.charAt(0) + full.slice(1).toLowerCase();
+    el.value = display;
+    handleModelInput(display);
+    // hide suggestion box
+    const box = document.getElementById('modelSuggestBox');
+    if(box) box.style.display='none';
+  } else if (matches.length > 1) {
+    // If exact match exists, prefer it
+    if (all[key]) {
+      const display = key.charAt(0) + key.slice(1).toLowerCase();
+      el.value = display;
+      handleModelInput(display);
     }
   }
-  if(bestKey){
-    document.getElementById('inModel').value = bestKey.charAt(0) + bestKey.slice(1).toLowerCase();
-  }
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  const modelInput = document.getElementById('inModel');
-  if(modelInput){
-    modelInput.addEventListener('blur', function(){
-      const raw = this.value.trim();
-      if(raw.length >= 2) autoCompleteModel(raw);
-    });
-  }
-});
+let _sugHighlight=-1;
+const CAT_SUGGEST_STYLE={
+  type1:{bg:'rgba(79,142,247,0.15)',color:'var(--accent)',label:'Type 1'},
+  type2:{bg:'rgba(167,139,250,0.15)',color:'var(--purple)',label:'Type 2'},
+  type3:{bg:'rgba(249,124,79,0.15)',color:'var(--accent3)',label:'Type 3'},
+  type4:{bg:'rgba(34,217,138,0.15)',color:'var(--accent2)',label:'Type 4'},
+  bike:{bg:'rgba(245,200,66,0.15)',color:'var(--warn)',label:'Bike'},
+  superbike:{bg:'rgba(200,16,46,0.15)',color:'var(--brand)',label:'Superbike'},
+};
 
-function applyCategory(cat){
-  selectedVehicleType=cat; selectedWashType='';
-  const meta=CAT_META[cat];
-  const prices=DB.pricing[cat]||{normal:0,foam:0};
-  const badge=document.getElementById('modelDetectBadge');
-  badge.style.display='block';
-  badge.style.background=`${meta.color}18`;
-  badge.style.borderColor=`${meta.color}40`;
-  badge.style.color=meta.color;
-  badge.textContent=`${meta.icon} Detected: ${meta.label}`;
-  document.getElementById('washTypeSection').style.display='block';
-  document.querySelectorAll('#washTypeSel .type-btn').forEach(b=>b.classList.remove('selected'));
-  const foamBtn=document.getElementById('foamWashBtn');
-  // For bikes: foam IS available (updated pricing)
-  foamBtn.style.opacity='1';
-  foamBtn.style.pointerEvents='auto';
-  document.getElementById('wash-normal-display').textContent='₹'+prices.normal;
-  document.getElementById('wash-foam-display').textContent='₹'+prices.foam;
-  updateCalcAmount(); updatePositionPreview();
-}
-
-function selectManualCat(cat,el){
-  // Deselect all manual cat buttons in both sections
-  document.querySelectorAll('#manualCatSel .type-btn,#manualBikeCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-  applyCategory(cat);
-}
-
-function selectWashType(t,el){
-  document.querySelectorAll('#washTypeSel .type-btn').forEach(b=>b.classList.remove('selected'));
-  if(el)el.classList.add('selected');
-  selectedWashType=t;
-  updateCalcAmount(); updatePositionPreview();
-}
-
-function setPayMode(m){
-  payMode=m;
-  document.getElementById('payTabAuto').classList.toggle('active',m==='auto');
-  document.getElementById('payTabManual').classList.toggle('active',m==='manual');
-  document.getElementById('manualAmtWrap').style.display=m==='manual'?'block':'none';
-  document.getElementById('autoAmtWrap').style.display=m==='auto'?'block':'none';
-}
-
-function updateCalcAmount(){
-  if(!selectedVehicleType||!selectedWashType){document.getElementById('calcAmount').textContent='₹0';return;}
-  const prices=DB.pricing[selectedVehicleType]||{normal:0,foam:0};
-  document.getElementById('calcAmount').textContent='₹'+(prices[selectedWashType]||0);
-}
-
-function updatePriceDisplays(){
-  if(selectedVehicleType)applyCategory(selectedVehicleType);
-  updateCalcAmount();
-}
-
-function updatePositionPreview(){
-  const bk=isBikeType(selectedVehicleType);
-  const waiting=DB.queue.filter(q=>{
-    if(q.status!=='waiting')return false;
-    return bk?isBikeType(q.vehicleType):!isBikeType(q.vehicleType);
-  }).length;
-  const posEl=document.getElementById('posNumber');
-  const waitEl=document.getElementById('estWait');
-  if(posEl)posEl.textContent='#'+(waiting+1);
-  if(waitEl){
-    const washTime=selectedWashType==='foam'?DB.timeConfig.foam:(selectedWashType==='normal'?DB.timeConfig.normal:15);
-    const estMin=waiting*washTime;
-    waitEl.textContent=waiting===0?'🟢 Next up — ready immediately!':'⏱️ Est. wait: ~'+estMin+' min';
-  }
-}
-
-/* ── Payment status & method ── */
-function setPayStatus(status){
-  selectedPayStatus=status;
-  document.getElementById('payBtnPaid').className='pay-status-btn'+(status==='paid'?' sel-paid':'');
-  document.getElementById('payBtnUnpaid').className='pay-status-btn'+(status==='unpaid'?' sel-unpaid':'');
-  const methodRow=document.getElementById('payMethodRow');
-  methodRow.style.display=status==='paid'?'flex':'none';
-  if(status==='unpaid'){
-    selectedPayMethod='';
-    document.getElementById('payBtnUPI').className='pay-method-btn';
-    document.getElementById('payBtnCash').className='pay-method-btn';
-  }
-}
-function setPayMethod(method){
-  selectedPayMethod=method;
-  document.getElementById('payBtnUPI').className='pay-method-btn'+(method==='upi'?' sel-upi':'');
-  document.getElementById('payBtnCash').className='pay-method-btn'+(method==='cash'?' sel-cash':'');
-}
-
-/* ── Suggestions ── */
-function handleSuggest(field,val){
-  if(val.length<2){hideSug(field);return;}
-  const seen=new Set();
-  const results=DB.history.filter(h=>{
-    const match=field==='vehicleNum'?h.vehicleNum.toLowerCase().includes(val.toLowerCase()):h.phone.includes(val);
-    const key=h.vehicleNum+h.phone;
-    if(match&&!seen.has(key)){seen.add(key);return true;}return false;
-  }).slice(0,5);
-  if(!results.length){hideSug(field);return;}
-  const box=document.getElementById('sug-'+field);
-  box.innerHTML=results.map(r=>{
-    const vn=esc(r.vehicleNum),ph=esc(r.phone),nm=esc(r.name||''),md=esc(r.model||'');
-    return`<div class="suggestion-item" onclick="fillFromSuggestion('${vn}','${ph}','${nm}','${md}')"><span class="sug-vehicle">${vn}</span> — ${md||'N/A'}<div class="sug-detail">${nm} 📞 ${ph}</div></div>`;
-  }).join('');
-  box.style.display='block';
-}
-function esc(s){return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
-function hideSug(field){const el=document.getElementById('sug-'+field);if(el)el.style.display='none';}
-function fillFromSuggestion(vn,ph,nm,md){
-  document.getElementById('inVehicleNum').value=vn;
-  document.getElementById('inPhone').value=ph;
-  document.getElementById('inName').value=nm;
-  document.getElementById('inModel').value=md;
-  hideSug('vehicleNum');hideSug('phone');
-  if(md)handleModelInput(md);
-  updatePositionPreview();
-}
-document.addEventListener('click',e=>{if(!e.target.closest('.field-group')&&!e.target.closest('.suggestions-box')){hideSug('vehicleNum');hideSug('phone');hideSug('custSearch');}});
-
-/* ── Customer History Search ── */
-function handleCustomerSearch(val){
-  if(val.length<2){document.getElementById('custHistResults').style.display='none';hideSug('custSearch');return;}
-  const box=document.getElementById('sug-custSearch');
-  const seen=new Set();
-  const matches=DB.history.filter(h=>{
-    const key=h.phone;
-    const nameMatch=h.name&&h.name.toLowerCase().includes(val.toLowerCase());
-    const phoneMatch=h.phone.includes(val);
-    if((nameMatch||phoneMatch)&&!seen.has(key)){seen.add(key);return true;}return false;
-  }).slice(0,6);
+function showModelSuggestions(raw){
+  const box=document.getElementById('modelSuggestBox');
+  if(!box) return;
+  const query=(raw||'').trim().toUpperCase();
+  if(query.length<1){box.style.display='none';return;}
+  const all=getAllModels();
+  // Filter by current main category if set
+  const matches=Object.entries(all)
+    .filter(([m,c])=>{
+      if(!m.startsWith(query)) return false;
+      if(selectedMainCat==='car') return !CAT_META[c]?.isBike;
+      if(selectedMainCat==='bike') return CAT_META[c]?.isBike;
+      return true;
+    })
+    .sort((a,b)=>a[0].localeCompare(b[0])).slice(0,12);
   if(!matches.length){box.style.display='none';return;}
-  box.innerHTML=matches.map(r=>`<div class="suggestion-item" onclick="showCustomerHistory('${esc(r.phone)}')"><span class="sug-vehicle">${esc(r.phone)}</span> — ${esc(r.name||'Unknown')}</div>`).join('');
-  box.style.display='block';
-}
-function clearCustomerSearch(){
-  document.getElementById('custSearchInput').value='';
-  document.getElementById('custHistResults').style.display='none';
-  hideSug('custSearch');
-}
-function showCustomerHistory(phone){
-  hideSug('custSearch');
-  const all=DB.history.filter(h=>h.phone===phone).sort((a,b)=>b.entryTime.localeCompare(a.entryTime));
-  if(!all.length)return;
-  const name=all[0].name||'Unknown Customer';
-  const initials=name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)||'?';
-  const totalSpend=all.filter(h=>h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
-  const visits=all.length;
-  const visitRows=all.map(h=>`<div class="cust-visit-item">
-    <div style="min-width:80px;font-size:11px;color:var(--text3);font-family:'Space Mono',monospace">${h.entryTime?h.entryTime.split('T')[0]:'—'}</div>
-    <div style="font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);min-width:90px">${h.vehicleNum}</div>
-    <div style="flex:1;font-size:12px;color:var(--text2)">${h.model||'—'} &bull; <span class="tag tag-${h.vehicleType}" style="font-size:10px">${h.vehicleType}</span> <span class="tag tag-${h.washType}" style="font-size:10px">${h.washType}</span></div>
-    <div style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--accent2)">₹${h.amount}</div>
-    <span class="tag tag-${h.status}" style="font-size:10px">${h.status}</span>
-  </div>`).join('');
-  const resultsEl=document.getElementById('custHistResults');
-  resultsEl.innerHTML=`<div class="cust-hist-card">
-    <div class="cust-hist-header">
-      <div class="cust-hist-avatar">${initials}</div>
-      <div>
-        <div class="cust-hist-name">${name}</div>
-        <div class="cust-hist-sub">📞 ${phone} &nbsp;|&nbsp; ${visits} visit${visits!==1?'s':''} &nbsp;|&nbsp; Total spent: <strong style="color:var(--accent2)">₹${totalSpend}</strong></div>
-      </div>
-    </div>
-    ${visitRows}
-  </div>`;
-  resultsEl.style.display='block';
-}
-
-function handleAdminCustomerSearch(val){
-  if(val.length<2){document.getElementById('adminCustHistResults').innerHTML='';return;}
-  const seen=new Set();
-  const matches=DB.history.filter(h=>{
-    const key=h.phone;
-    const nm=h.name&&h.name.toLowerCase().includes(val.toLowerCase());
-    const ph=h.phone.includes(val);
-    if((nm||ph)&&!seen.has(key)){seen.add(key);return true;}return false;
-  });
-  if(!matches.length){document.getElementById('adminCustHistResults').innerHTML='<div class="empty-state"><div class="es-icon">🔍</div><p>No customers found</p></div>';return;}
-  const resultsEl=document.getElementById('adminCustHistResults');
-  resultsEl.innerHTML=matches.map(r=>{
-    const all=DB.history.filter(h=>h.phone===r.phone).sort((a,b)=>b.entryTime.localeCompare(a.entryTime));
-    const name=all[0]?.name||'Unknown Customer';
-    const initials=name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2)||'?';
-    const totalSpend=all.filter(h=>h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
-    const visits=all.length;
-    const visitRows=all.slice(0,5).map(h=>`<div class="cust-visit-item">
-      <div style="min-width:80px;font-size:11px;color:var(--text3);font-family:'Space Mono',monospace">${h.entryTime?h.entryTime.split('T')[0]:'—'}</div>
-      <div style="font-family:'Space Mono',monospace;font-size:12px;color:var(--accent);min-width:90px">${h.vehicleNum}</div>
-      <div style="flex:1;font-size:12px;color:var(--text2)">${h.model||'—'} &bull; <span class="tag tag-${h.vehicleType}" style="font-size:10px">${h.vehicleType}</span> <span class="tag tag-${h.washType}" style="font-size:10px">${h.washType}</span></div>
-      <div style="font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--accent2)">₹${h.amount}</div>
-      <span class="tag tag-${h.status}" style="font-size:10px">${h.status}</span>
-    </div>`).join('');
-    return`<div class="cust-hist-card">
-      <div class="cust-hist-header">
-        <div class="cust-hist-avatar">${initials}</div>
-        <div><div class="cust-hist-name">${name}</div><div class="cust-hist-sub">📞 ${r.phone} &nbsp;|&nbsp; ${visits} visit${visits!==1?'s':''} &nbsp;|&nbsp; Total: <strong style="color:var(--accent2)">₹${totalSpend}</strong></div></div>
-      </div>${visitRows}${all.length>5?`<div style="font-size:12px;color:var(--text3);text-align:center;padding:8px 0">…and ${all.length-5} more visits</div>`:''}
+  _sugHighlight=-1;
+  box.innerHTML=matches.map(([model,cat],i)=>{
+    const s=CAT_SUGGEST_STYLE[cat]||CAT_SUGGEST_STYLE.type1;
+    const display=model.charAt(0)+model.slice(1).toLowerCase();
+    return `<div class="model-suggest-item" data-index="${i}" data-model="${model}" data-cat="${cat}"
+      onmousedown="pickModelSuggestion('${model}','${cat}')"
+      onmouseover="hoverSugItem(${i})">
+      <span class="model-suggest-name">${display}</span>
+      <span class="model-suggest-cat" style="background:${s.bg};color:${s.color}">${s.label}</span>
     </div>`;
   }).join('');
+  box.style.display='block';
 }
-function clearAdminCustomerSearch(){document.getElementById('adminCustSearchInput').value='';document.getElementById('adminCustHistResults').innerHTML='';}
+
+function hoverSugItem(i){
+  _sugHighlight=i;
+  document.querySelectorAll('.model-suggest-item').forEach((el,idx)=>{el.style.background=idx===i?'var(--surface2)':'';});
+}
+
+function modelSuggestKeyNav(e){
+  const box=document.getElementById('modelSuggestBox');
+  if(!box||box.style.display==='none') return;
+  const items=box.querySelectorAll('.model-suggest-item');
+  if(e.key==='ArrowDown'){e.preventDefault();_sugHighlight=Math.min(_sugHighlight+1,items.length-1);items.forEach((el,i)=>el.style.background=i===_sugHighlight?'var(--surface2)':'');}
+  else if(e.key==='ArrowUp'){e.preventDefault();_sugHighlight=Math.max(_sugHighlight-1,0);items.forEach((el,i)=>el.style.background=i===_sugHighlight?'var(--surface2)':'');}
+  else if(e.key==='Enter'&&_sugHighlight>=0){e.preventDefault();const item=items[_sugHighlight];if(item)pickModelSuggestion(item.dataset.model,item.dataset.cat);}
+  else if(e.key==='Escape'){box.style.display='none';}
+}
+
+function pickModelSuggestion(model,cat){
+  const display=model.charAt(0)+model.slice(1).toLowerCase();
+  document.getElementById('inModel').value=display;
+  document.getElementById('modelSuggestBox').style.display='none';
+  handleModelInput(display);
+}
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#inModel')&&!e.target.closest('#modelSuggestBox')){
+    const box=document.getElementById('modelSuggestBox');
+    if(box) box.style.display='none';
+  }
+  if(!e.target.closest('.field-group')){hideSug('vehicleNum');hideSug('phone');}
+});
 
 /* ── Firebase realtime ── */
 function attachRealtimeListeners(){
@@ -1222,7 +1235,353 @@ function clearForm(resetPos=true){
   if(resetPos){document.getElementById('posNumber').textContent='—';document.getElementById('estWait').textContent='Fill in details above';}
 }
 
-/* ── Queue rendering ── */
+/* ── Payment ── */
+function setPayStatus(status){
+  selectedPayStatus=status;
+  document.getElementById('payBtnPaid').className='pay-status-btn'+(status==='paid'?' sel-paid':'');
+  document.getElementById('payBtnUnpaid').className='pay-status-btn'+(status==='unpaid'?' sel-unpaid':'');
+  const methodRow=document.getElementById('payMethodRow');
+  methodRow.style.display=status==='paid'?'flex':'none';
+  if(status==='unpaid'){selectedPayMethod='';document.getElementById('payBtnUPI').className='pay-method-btn';document.getElementById('payBtnCash').className='pay-method-btn';}
+}
+function setPayMethod(method){
+  selectedPayMethod=method;
+  document.getElementById('payBtnUPI').className='pay-method-btn'+(method==='upi'?' sel-upi':'');
+  document.getElementById('payBtnCash').className='pay-method-btn'+(method==='cash'?' sel-cash':'');
+}
+
+function validatePhone(el){
+  const digits=(el.value||'').replace(/\D/g,'').length;
+  const hint=document.getElementById('phoneLenHint');
+  if(!hint) return;
+  if(el.value.length>0&&digits<10){hint.style.display='block';hint.textContent='⚠️ '+digits+'/10 digits — need '+(10-digits)+' more';el.style.borderColor='var(--danger)';}
+  else{hint.style.display='none';el.style.borderColor=digits>=10?'var(--accent2)':'';}
+}
+
+/* ── Model auto-detect ── */
+function handleModelInput(raw){
+  if(!raw||raw.length<2){
+    document.getElementById('modelDetectBadge').style.display='none';
+    document.getElementById('modelNotFound').style.display='none';
+    if(selectedMainCat!=='bike'){
+      document.getElementById('manualCatSection').style.display='none';
+      document.getElementById('washTypeSection').style.display='none';
+      selectedVehicleType=''; selectedWashType='';
+    }
+    updateCalcAmount(); return;
+  }
+  const cat=lookupModel(raw);
+  if(cat){
+    // Validate against main category
+    const isBikeCat=CAT_META[cat]?.isBike;
+    if(selectedMainCat==='car'&&isBikeCat){
+      document.getElementById('modelNotFound').style.display='block';
+      document.getElementById('modelNotFound').textContent='⚠️ This looks like a bike model — please select Bike above';
+      document.getElementById('modelDetectBadge').style.display='none';
+      return;
+    }
+    if(selectedMainCat==='bike'&&!isBikeCat){
+      document.getElementById('modelNotFound').style.display='block';
+      document.getElementById('modelNotFound').textContent='⚠️ This looks like a car model — please select Car above';
+      document.getElementById('modelDetectBadge').style.display='none';
+      return;
+    }
+    applyCategory(cat);
+    document.getElementById('modelNotFound').style.display='none';
+    document.getElementById('manualCatSection').style.display='none';
+  } else {
+    document.getElementById('modelDetectBadge').style.display='none';
+    document.getElementById('modelNotFound').style.display='block';
+    document.getElementById('modelNotFound').textContent='⚠️ Model not found — select category manually below';
+    if(selectedMainCat==='car'){
+      document.getElementById('manualCatSection').style.display='block';
+      document.getElementById('washTypeSection').style.display='none';
+    }
+    selectedVehicleType=''; selectedWashType='';
+    updateCalcAmount();
+  }
+}
+
+function applyCategory(cat){
+  selectedVehicleType=cat;
+  const meta=CAT_META[cat];
+  const prices=DB.pricing[cat]||{normal:0,foam:0};
+  const badge=document.getElementById('modelDetectBadge');
+  badge.style.display='block';
+  badge.style.background=`${meta.color}18`;
+  badge.style.borderColor=`${meta.color}40`;
+  badge.style.color=meta.color;
+  badge.textContent=`${meta.icon} Detected: ${meta.label}`;
+
+  if(meta.isBike){
+    // Bikes: set in bikeCatSection, auto-select foam
+    selectedWashType='foam';
+    selectedVehicleType=cat;
+    document.getElementById('washTypeSection').style.display='none';
+    // Auto-select the right bike btn
+    document.querySelectorAll('#bikeCatSel .type-btn').forEach(b=>{
+      b.classList.toggle('selected', b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+cat+"'"));
+    });
+    if(selectedMainCat==='bike'){
+      document.getElementById('bikeCatSection').style.display='block';
+    }
+  } else {
+    // Cars: show wash type
+    document.getElementById('washTypeSection').style.display='block';
+    selectedWashType='';
+    document.querySelectorAll('#washTypeSel .type-btn').forEach(b=>b.classList.remove('selected'));
+    document.getElementById('wash-normal-display').textContent='₹'+prices.normal;
+    document.getElementById('wash-foam-display').textContent='₹'+prices.foam;
+  }
+  updateCalcAmount(); updatePositionPreview();
+}
+
+function selectManualCat(cat,el){
+  document.querySelectorAll('#manualCatSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  applyCategory(cat);
+}
+
+function selectWashType(t,el){
+  document.querySelectorAll('#washTypeSel .type-btn').forEach(b=>b.classList.remove('selected'));
+  if(el) el.classList.add('selected');
+  selectedWashType=t;
+  updateCalcAmount(); updatePositionPreview();
+}
+
+function setPayMode(m){
+  payMode=m;
+  document.getElementById('payTabAuto').classList.toggle('active',m==='auto');
+  document.getElementById('payTabManual').classList.toggle('active',m==='manual');
+  document.getElementById('manualAmtWrap').style.display=m==='manual'?'block':'none';
+  document.getElementById('autoAmtWrap').style.display=m==='auto'?'block':'none';
+}
+
+function updateCalcAmount(){
+  if(!selectedVehicleType||!selectedWashType){document.getElementById('calcAmount').textContent='₹0';return;}
+  const prices=DB.pricing[selectedVehicleType]||{normal:0,foam:0};
+  document.getElementById('calcAmount').textContent='₹'+(prices[selectedWashType]||0);
+}
+
+function updatePriceDisplays(){if(selectedVehicleType) applyCategory(selectedVehicleType);updateCalcAmount();}
+
+function updatePositionPreview(){
+  const isBike=CAT_META[selectedVehicleType]?.isBike;
+  const waiting=DB.queue.filter(q=>{
+    if(q.status!=='waiting') return false;
+    return isBike?CAT_META[q.vehicleType]?.isBike:!CAT_META[q.vehicleType]?.isBike;
+  }).length;
+  const posEl=document.getElementById('posNumber');
+  const waitEl=document.getElementById('estWait');
+  if(posEl) posEl.textContent='#'+(waiting+1);
+  if(waitEl){
+    const washTime=selectedWashType==='foam'?DB.timeConfig.foam:(selectedWashType==='normal'?DB.timeConfig.normal:15);
+    const estMin=waiting*washTime;
+    waitEl.textContent=waiting===0?'🟢 Next up — ready immediately!':'⏱️ Est. wait: ~'+estMin+' min';
+  }
+}
+
+/* ── Suggestions (vehicle/phone history) ── */
+function handleSuggest(field,val){
+  if(val.length<2){hideSug(field);return;}
+  const seen=new Set();
+  const results=DB.history.filter(h=>{
+    const match=field==='vehicleNum'?h.vehicleNum.toLowerCase().includes(val.toLowerCase()):h.phone.includes(val);
+    const key=h.vehicleNum+h.phone;
+    if(match&&!seen.has(key)){seen.add(key);return true;} return false;
+  }).slice(0,5);
+  if(!results.length){hideSug(field);return;}
+  const box=document.getElementById('sug-'+field);
+  box.innerHTML=results.map(r=>{
+    const vn=esc(r.vehicleNum),ph=esc(r.phone),nm=esc(r.name||''),md=esc(r.model||'');
+    return `<div class="suggestion-item" onclick="fillFromSuggestion('${vn}','${ph}','${nm}','${md}')"><span class="sug-vehicle">${vn}</span> — ${md||'N/A'}<div class="sug-detail">${nm} 📞 ${ph}</div></div>`;
+  }).join('');
+  box.style.display='block';
+}
+function esc(s){return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+function hideSug(field){const el=document.getElementById('sug-'+field);if(el) el.style.display='none';}
+function fillFromSuggestion(vn,ph,nm,md){
+  document.getElementById('inVehicleNum').value=vn;
+  document.getElementById('inPhone').value=ph;
+  document.getElementById('inName').value=nm;
+  if(document.getElementById('inModel')) document.getElementById('inModel').value=md;
+  hideSug('vehicleNum');hideSug('phone');
+  if(md) handleModelInput(md);
+  updatePositionPreview();
+}
+
+/* ── Customer search (checkin sidebar) ── */
+function searchCustomer(val){
+  const box=document.getElementById('custSearchResults');
+  if(!val||val.length<2){box.innerHTML='';return;}
+  const q=val.toLowerCase();
+  const seen=new Set();
+  const matches=DB.history.filter(h=>{
+    const key=h.phone;
+    if(seen.has(key)) return false;
+    if((h.name||'').toLowerCase().includes(q)||h.phone.includes(val)){seen.add(key);return true;}
+    return false;
+  }).slice(0,5);
+  if(!matches.length){box.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px">No customers found</div>';return;}
+  box.innerHTML=matches.map(c=>{
+    const visits=DB.history.filter(h=>h.phone===c.phone).length;
+    const spent=DB.history.filter(h=>h.phone===c.phone&&h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
+    return `<div style="padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;margin-bottom:7px;cursor:pointer" onclick="showCustHistory('${c.phone}')">
+      <div style="font-weight:700;font-size:13px">${c.name||'Unknown'} <span style="font-size:11px;color:var(--text2)">📞 ${c.phone}</span></div>
+      <div style="font-size:11px;color:var(--text2);margin-top:3px">${visits} visit${visits!==1?'s':''} · ₹${spent} spent</div>
+    </div>`;
+  }).join('');
+}
+function clearCustSearch(){
+  document.getElementById('custSearchInput').value='';
+  document.getElementById('custSearchResults').innerHTML='';
+}
+
+function showCustHistory(phone){
+  const visits=DB.history.filter(h=>h.phone===phone).sort((a,b)=>b.entryTime.localeCompare(a.entryTime));
+  if(!visits.length) return;
+  const c=visits[0];
+  const totalSpent=visits.filter(h=>h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
+  const totalVisits=visits.length;
+  const lastVisit=new Date(c.entryTime).toLocaleDateString('en-IN');
+  document.getElementById('custHistTitle').textContent=(c.name||'Unknown')+' — History';
+  document.getElementById('custHistContent').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+      <div class="cust-stat"><div class="cust-stat-val" style="color:var(--accent)">${totalVisits}</div><div class="cust-stat-lbl">Total Visits</div></div>
+      <div class="cust-stat"><div class="cust-stat-val" style="color:var(--accent2)">₹${totalSpent}</div><div class="cust-stat-lbl">Total Spent</div></div>
+      <div class="cust-stat"><div class="cust-stat-val" style="color:var(--accent3);font-size:16px">${lastVisit}</div><div class="cust-stat-lbl">Last Visit</div></div>
+    </div>
+    <div style="font-size:11px;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px">Visit History</div>
+    ${visits.map(v=>`
+      <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;margin-bottom:6px">
+        <div style="font-size:18px">${CAT_META[v.vehicleType]?.icon||'🚗'}</div>
+        <div style="flex:1">
+          <div style="font-size:12px;font-weight:700;color:var(--accent);font-family:'Space Mono',monospace">${v.vehicleNum}</div>
+          <div style="font-size:11px;color:var(--text2)">${v.model||'—'} · ${v.washType==='foam'?'🫧 Foam':'💧 Normal'}</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">${new Date(v.entryTime).toLocaleString('en-IN')}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:'Space Mono',monospace;font-weight:700;color:var(--accent2)">₹${v.amount}</div>
+          <span class="tag tag-${v.status}" style="font-size:10px">${v.status}</span>
+        </div>
+      </div>`).join('')}`;
+  document.getElementById('custHistModal').style.display='flex';
+}
+
+/* ── Admin customer search ── */
+function adminSearchCustomer(val){
+  const box=document.getElementById('adminCustResults');
+  if(!val||val.length<2){
+    box.innerHTML='<div class="empty-state"><div class="es-icon">👤</div><p>Search by customer name or mobile number above.</p></div>';
+    return;
+  }
+  const q=val.toLowerCase();
+  const seen=new Set();
+  const matches=DB.history.filter(h=>{
+    const key=h.phone;
+    if(seen.has(key)) return false;
+    if((h.name||'').toLowerCase().includes(q)||h.phone.includes(val)){seen.add(key);return true;}
+    return false;
+  });
+  if(!matches.length){box.innerHTML='<div class="empty-state"><div class="es-icon">🔍</div><p>No customers found matching "'+val+'"</p></div>';return;}
+  box.innerHTML=matches.map(c=>{
+    const visits=DB.history.filter(h=>h.phone===c.phone);
+    const totalSpent=visits.filter(h=>h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
+    const carVisits=visits.filter(h=>!CAT_META[h.vehicleType]?.isBike).length;
+    const bikeVisits=visits.filter(h=>CAT_META[h.vehicleType]?.isBike).length;
+    const lastVisit=visits.length?new Date(visits[visits.length-1].entryTime).toLocaleDateString('en-IN'):'—';
+    return `<div class="cust-result-card" style="cursor:pointer" onclick="showCustHistory('${c.phone}')">
+      <div class="cust-result-header">
+        <div class="cust-avatar">${(c.name||'?').charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="cust-name">${c.name||'Unknown Customer'}</div>
+          <div class="cust-phone">📞 ${c.phone}</div>
+        </div>
+      </div>
+      <div class="cust-stats">
+        <div class="cust-stat"><div class="cust-stat-val" style="color:var(--accent)">${visits.length}</div><div class="cust-stat-lbl">Total Visits</div></div>
+        <div class="cust-stat"><div class="cust-stat-val" style="color:var(--accent2)">₹${totalSpent}</div><div class="cust-stat-lbl">Total Spent</div></div>
+        <div class="cust-stat"><div class="cust-stat-val" style="color:var(--text2);font-size:14px">${lastVisit}</div><div class="cust-stat-lbl">Last Visit</div></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <span class="tag tag-type1">🚗 ${carVisits} car visit${carVisits!==1?'s':''}</span>
+        <span class="tag tag-bike">🏍️ ${bikeVisits} bike visit${bikeVisits!==1?'s':''}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ── Queue operations ── */
+async function addToQueue(){
+  const vehicleNum=(document.getElementById('inVehicleNum').value||'').trim().toUpperCase();
+  const phone=(document.getElementById('inPhone').value||'').trim();
+  const name=(document.getElementById('inName').value||'').trim();
+  const modelEl=document.getElementById('inModel');
+  const model=modelEl?(modelEl.value||'').trim():'';
+  if(!vehicleNum){toast('Please enter vehicle number','error');return;}
+  if(!phone){toast('Please enter phone number','error');return;}
+  if(phone.replace(/\D/g,'').length<10){toast('Phone number must be at least 10 digits','error');return;}
+  if(!selectedMainCat){toast('Please select Car or Bike category','error');return;}
+  if(!selectedVehicleType){toast('Please select a specific vehicle type/model','error');return;}
+  if(!selectedWashType){toast('Please select wash type','error');return;}
+  if(!selectedPayStatus){toast('Please select payment status','error');return;}
+  if(selectedPayStatus==='paid'&&!selectedPayMethod){toast('Please select payment method','error');return;}
+  let amount=0;
+  if(payMode==='auto'){const prices=DB.pricing[selectedVehicleType]||{normal:0,foam:0};amount=prices[selectedWashType]||0;}
+  else amount=parseFloat(document.getElementById('inManualAmt').value)||0;
+  let newId;
+  if(fbDB){
+    try{const result=await fbDB.ref('counters/nextId').transaction(cur=>(cur||1)+1);newId=(result.snapshot.val()-1);}
+    catch(e){toast('Unable to reach server. Please try again.','error');return;}
+  } else newId=DB.nextId++;
+  const entry={
+    id:'CW'+String(newId).padStart(4,'0'),
+    vehicleNum,phone,name,model,
+    vehicleType:selectedVehicleType,washType:selectedWashType,amount,
+    paymentStatus:selectedPayStatus,
+    paymentMethod:selectedPayStatus==='paid'?selectedPayMethod:'',
+    status:'waiting',entryTime:new Date().toISOString(),startTime:null,endTime:null
+  };
+  if(fbDB){
+    try{await fbDB.ref('queue/'+entry.id).set(entry);await fbDB.ref('history/'+entry.id).set(entry);}
+    catch(e){toast('Save failed: '+(e.message||'unknown'),'error');return;}
+  } else {
+    DB.queue.push(entry); DB.history.push(entry); refreshQueueDisplay(); updateLiveStats();
+  }
+  const pos=DB.queue.filter(q=>q.status==='waiting').length+1;
+  toast('✅ '+vehicleNum+' added! Position #'+pos,'success');
+  clearForm(false);
+}
+
+function clearForm(resetPos=true){
+  ['inVehicleNum','inPhone','inName','inManualAmt'].forEach(id=>{const el=document.getElementById(id);if(el) el.value='';});
+  const inModel=document.getElementById('inModel');if(inModel) inModel.value='';
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('selected'));
+  selectedMainCat=''; selectedVehicleType=''; selectedWashType='';
+  selectedPayStatus=''; selectedPayMethod='';
+  document.getElementById('calcAmount').textContent='₹0';
+  document.getElementById('modelDetectBadge').style.display='none';
+  document.getElementById('modelNotFound').style.display='none';
+  document.getElementById('manualCatSection').style.display='none';
+  document.getElementById('washTypeSection').style.display='none';
+  document.getElementById('bikeCatSection').style.display='none';
+  document.getElementById('modelFieldSection').style.display='none';
+  document.getElementById('payBtnPaid').className='pay-status-btn';
+  document.getElementById('payBtnUnpaid').className='pay-status-btn';
+  document.getElementById('payBtnUPI').className='pay-method-btn';
+  document.getElementById('payBtnCash').className='pay-method-btn';
+  document.getElementById('payMethodRow').style.display='none';
+  if(resetPos){document.getElementById('posNumber').textContent='—';document.getElementById('estWait').textContent='Fill in details above';}
+}
+
+/* ── History vehicle tab ── */
+function selectHistVehicleTab(tab,el){
+  histVehicleTab=tab;
+  document.querySelectorAll('.hv-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  loadHistory();
+}
+
 function selectQueueVehicleTab(tab,el){
   queueVehicleTab=tab;
   document.querySelectorAll('.qv-tab').forEach(b=>b.classList.remove('active'));
@@ -1232,72 +1591,77 @@ function selectQueueVehicleTab(tab,el){
 function filterQueue(v){queueFilter=v;refreshQueueDisplay();}
 function filterPayment(v){queuePayFilter=v;refreshQueueDisplay();}
 function refreshQueueDisplay(){updateLiveStats();updateQueueVehicleCounts();renderQueueList('queueList',false);}
+
 function updateQueueVehicleCounts(){
   const all=DB.queue;
   setTxt('qvc-all',all.length);
-  setTxt('qvc-cars',all.filter(q=>!isBikeType(q.vehicleType)).length);
-  setTxt('qvc-bikes',all.filter(q=>isBikeType(q.vehicleType)).length);
+  setTxt('qvc-cars',all.filter(q=>!CAT_META[q.vehicleType]?.isBike).length);
+  setTxt('qvc-bikes',all.filter(q=>CAT_META[q.vehicleType]?.isBike).length);
 }
 
+/* ── Queue rendering: ONGOING FIRST, then WAITING ── */
 function renderQueueList(listId,isAdmin){
-  const list=document.getElementById(listId);if(!list)return;
+  const list=document.getElementById(listId);if(!list) return;
   let items=[...DB.queue];
-  if(queuePayFilter!=='all')items=items.filter(q=>(q.paymentStatus||'unpaid')===queuePayFilter);
+  if(queuePayFilter!=='all') items=items.filter(q=>(q.paymentStatus||'unpaid')===queuePayFilter);
   if(!isAdmin){
-    if(queueVehicleTab==='cars')items=items.filter(q=>!isBikeType(q.vehicleType));
-    else if(queueVehicleTab==='bikes')items=items.filter(q=>isBikeType(q.vehicleType));
+    if(queueVehicleTab==='cars') items=items.filter(q=>!CAT_META[q.vehicleType]?.isBike);
+    else if(queueVehicleTab==='bikes') items=items.filter(q=>CAT_META[q.vehicleType]?.isBike);
   }
-  // Status filter
-  const statusesToShow=queueFilter==='all'?['ongoing','waiting','completed']:[queueFilter];
-  if(!items.length){list.innerHTML='<div class="empty-state"><div class="es-icon">🚗</div><p>No vehicles in queue matching the selected filters.</p></div>';return;}
+  if(!items.length){list.innerHTML='<div class="empty-state"><div class="es-icon">🚗</div><p>No vehicles in queue.</p></div>';return;}
 
-  // Separate by vehicle group
+  const waitingPool=DB.queue.filter(q=>q.status==='waiting'&&!CAT_META[q.vehicleType]?.isBike);
+  const waitingBikePool=DB.queue.filter(q=>q.status==='waiting'&&CAT_META[q.vehicleType]?.isBike);
   const showCars=queueVehicleTab!=='bikes';
   const showBikes=queueVehicleTab!=='cars';
-  const waitingCars=DB.queue.filter(q=>q.status==='waiting'&&!isBikeType(q.vehicleType));
-  const waitingBikes=DB.queue.filter(q=>q.status==='waiting'&&isBikeType(q.vehicleType));
 
+  // STATUS ORDER: ongoing → waiting → completed
+  const statusOrder=['ongoing','waiting','completed'];
   const statusMeta={
     waiting:{label:'⏳ Waiting',cls:'qss-waiting'},
     ongoing:{label:'🔵 In Progress',cls:'qss-ongoing'},
     completed:{label:'✅ Completed',cls:'qss-completed'}
   };
 
-  // In the queue, ongoing goes FIRST
-  const orderedStatuses=['ongoing','waiting','completed'].filter(s=>statusesToShow.includes(s));
+  let showStatuses=statusOrder;
+  if(queueFilter!=='all') showStatuses=[queueFilter];
 
-  function renderVehicleGroup(vehicleLabel,vehicleItems){
-    if(!vehicleItems.length)return'';
-    const isCarGroup=vehicleLabel==='cars';
-    const waitingPool=isCarGroup?waitingCars:waitingBikes;
-    let groupHtml=`<div class="queue-section-header"><span class="qsh-icon">${isCarGroup?'🚗':'🏍️'}</span><span class="qsh-title">${isCarGroup?'Cars / SUVs':'Bikes / Superbikes'}</span><span class="qsh-count">${vehicleItems.length} ${isCarGroup?'vehicle':'bike'}${vehicleItems.length!==1?'s':''}</span></div>`;
-    let hasAny=false;
-    orderedStatuses.forEach(status=>{
+  function renderVehicleGroup(isCarGroup,vehicleItems){
+    if(!vehicleItems.length) return '';
+    const waitPool=isCarGroup?waitingPool:waitingBikePool;
+    let html=`<div class="queue-section-header">
+      <span class="qsh-icon">${isCarGroup?'🚗':'🏍️'}</span>
+      <span class="qsh-title">${isCarGroup?'Cars / SUVs':'Bikes / Superbikes'}</span>
+      <span class="qsh-count">${vehicleItems.length}</span>
+    </div>`;
+    let hasContent=false;
+    showStatuses.forEach(status=>{
       const statusItems=vehicleItems.filter(q=>q.status===status);
-      if(!statusItems.length)return;
-      hasAny=true;
+      if(!statusItems.length) return;
+      hasContent=true;
       const meta=statusMeta[status];
-      groupHtml+=`<div class="queue-status-section"><div class="queue-status-header ${meta.cls}">${meta.label} <span style="font-size:11px;font-family:'Space Mono',monospace;margin-left:4px">(${statusItems.length})</span></div>`;
-      groupHtml+=statusItems.map(q=>{
-        const pos=q.status==='waiting'?waitingPool.indexOf(q)+1:null;
+      html+=`<div class="queue-status-section"><div class="queue-status-header ${meta.cls}">${meta.label} <span style="font-size:11px;font-family:'Space Mono',monospace;margin-left:4px">(${statusItems.length})</span></div>`;
+      html+=statusItems.map(q=>{
+        const pos=q.status==='waiting'?waitPool.indexOf(q)+1:null;
         const wt=q.status==='waiting'&&pos>0?(pos-1)*(q.washType==='foam'?DB.timeConfig.foam:DB.timeConfig.normal):null;
         return renderRow(q,pos,wt,isAdmin);
       }).join('');
-      groupHtml+='</div>';
+      html+='</div>';
     });
-    return hasAny?groupHtml:'';
+    return hasContent?html:'';
   }
 
   let html='';
-  if(showCars){const carItems=items.filter(q=>!isBikeType(q.vehicleType));html+=renderVehicleGroup('cars',carItems);}
-  if(showBikes){const bikeItems=items.filter(q=>isBikeType(q.vehicleType));if(html)html+='<div style="margin:14px 0 4px"></div>';html+=renderVehicleGroup('bikes',bikeItems);}
-  list.innerHTML=html||'<div class="empty-state"><div class="es-icon">🚗</div><p>No vehicles in queue matching the selected filters.</p></div>';
+  if(showCars){html+=renderVehicleGroup(true,items.filter(q=>!CAT_META[q.vehicleType]?.isBike));}
+  if(showBikes){if(html) html+='<div style="margin:14px 0 4px"></div>';html+=renderVehicleGroup(false,items.filter(q=>CAT_META[q.vehicleType]?.isBike));}
+  list.innerHTML=html||'<div class="empty-state"><div class="es-icon">🚗</div><p>No vehicles matching filters.</p></div>';
 }
 
 function paymentTag(q){
-  const ps=q.paymentStatus||'unpaid';const pm=q.paymentMethod||'';
+  const ps=q.paymentStatus||'unpaid';
+  const pm=q.paymentMethod||'';
   let html=`<span class="tag tag-${ps}">${ps==='paid'?'✅ Paid':'⏳ Unpaid'}</span>`;
-  if(ps==='paid'&&pm)html+=`<span class="tag tag-${pm}">${pm==='upi'?'📱 UPI':'💵 Cash'}</span>`;
+  if(ps==='paid'&&pm) html+=`<span class="tag tag-${pm}">${pm==='upi'?'📱 UPI':'💵 Cash'}</span>`;
   return html;
 }
 
@@ -1311,24 +1675,25 @@ function renderRow(q,pos,wt,isAdmin){
   } else if(q.status==='ongoing'){
     actions=`<button class="btn btn-success btn-sm" onclick="completeWash('${q.id}')">✅ Done</button><button class="btn btn-ghost btn-sm" onclick="revertToWaiting('${q.id}')">↩️ Revert</button>`;
   } else {
-    const ps=q.paymentStatus||'unpaid';const pm=q.paymentMethod||'';
+    const ps=q.paymentStatus||'unpaid';
+    const pm=q.paymentMethod||'';
     const upiCls=(ps==='paid'&&pm==='upi')?' sel-upi':'';
     const cashCls=(ps==='paid'&&pm==='cash')?' sel-cash':'';
     const undoPaidBtn=ps==='paid'?`<button class="pay-inline-btn" onclick="undoPayment('${q.id}')" style="border-color:var(--danger);color:var(--danger)">↩️ Unpaid</button>`:'';
     actions=`<button class="btn btn-ghost btn-sm" onclick="revertToOngoing('${q.id}')">↩️ Undo</button><button class="btn btn-ghost btn-sm" onclick="showAdminBill('${q.id}')">🧾</button><button class="pay-inline-btn${upiCls}" onclick="setQueuePayMethod('${q.id}','upi')">📱 UPI</button><button class="pay-inline-btn${cashCls}" onclick="setQueuePayMethod('${q.id}','cash')">💵 Cash</button>${undoPaidBtn}`;
   }
-  return`<div class="queue-row status-${q.status}">
+  return `<div class="queue-row status-${q.status}">
     <div class="qr-pos">${posLabel}</div>
     <div class="qr-vehicle">${q.vehicleNum}</div>
     <div class="qr-info">
       <div class="qr-name">${q.model||'Unknown'} ${q.name?'• '+q.name:''}</div>
       <div class="qr-sub">📞 ${q.phone}</div>
       <div class="qr-tags">
-        <span class="tag tag-${q.vehicleType}">${(CAT_META[q.vehicleType]?.icon||'🚗')} ${(CAT_META[q.vehicleType]?.label||q.vehicleType).toUpperCase()}</span>
+        <span class="tag tag-${q.vehicleType}">${CAT_META[q.vehicleType]?.icon||'🚗'} ${(CAT_META[q.vehicleType]?.label||q.vehicleType).toUpperCase()}</span>
         <span class="tag tag-${q.washType}">${q.washType==='normal'?'💧 Normal':'🫧 Foam'}</span>
         <span class="tag tag-${q.status}">${q.status}</span>
         ${paymentTag(q)}
-        ${wt!==null?`<span style="font-size:11px;color:var(--accent3);font-family:'Space Mono',monospace">⏱️ ~${wt}m wait</span>`:''}
+        ${wt!==null?`<span style="font-size:11px;color:var(--accent3);font-family:'Space Mono',monospace">⏱️ ~${wt}m</span>`:''}
       </div>
     </div>
     <div class="qr-amount">₹${q.amount}</div>
@@ -1337,48 +1702,43 @@ function renderRow(q,pos,wt,isAdmin){
   </div>`;
 }
 
-function confirmDelete(id){const e=DB.queue.find(q=>q.id===id);if(!e)return;if(confirm('Remove '+e.vehicleNum+' from queue?'))removeEntry(id);}
-
+function confirmDelete(id){const e=DB.queue.find(q=>q.id===id);if(!e) return;if(confirm('Remove '+e.vehicleNum+' from queue?')) removeEntry(id);}
 async function removeEntry(id){
-  try{await fbDB.ref('queue/'+id).remove();await fbDB.ref('history/'+id).remove();toast('Entry removed','info');}
-  catch(e){toast('Remove failed: '+(e.message||'err'),'error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).remove();await fbDB.ref('history/'+id).remove();toast('Entry removed','info');}catch(e){toast('Remove failed','error');}}
+  else{DB.queue=DB.queue.filter(q=>q.id!==id);DB.history=DB.history.filter(h=>h.id!==id);refreshQueueDisplay();updateLiveStats();toast('Removed','info');}
 }
 async function startWash(id){
-  const e=DB.queue.find(q=>q.id===id);if(!e)return;
   const upd={status:'ongoing',startTime:new Date().toISOString()};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('▶️ Started wash for '+e.vehicleNum,'info');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('▶️ Started','info');}catch(e){toast('Update failed','error');}}
+  else{const q=DB.queue.find(x=>x.id===id);if(q){Object.assign(q,upd);refreshQueueDisplay();}}
 }
 async function completeWash(id){
-  const e=DB.queue.find(q=>q.id===id);if(!e)return;
+  const e=DB.queue.find(q=>q.id===id);if(!e) return;
   const upd={status:'completed',endTime:new Date().toISOString()};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('✅ '+e.vehicleNum+' done! ₹'+e.amount,'success');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('✅ '+e.vehicleNum+' done! ₹'+e.amount,'success');}catch(er){toast('Update failed','error');}}
+  else{Object.assign(e,upd);refreshQueueDisplay();}
 }
 async function revertToWaiting(id){
   const upd={status:'waiting',startTime:null};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Reverted to waiting','info');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Reverted','info');}catch(er){toast('Update failed','error');}}
 }
 async function revertToOngoing(id){
   const upd={status:'ongoing',endTime:null};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Reverted to in-progress','info');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Reverted','info');}catch(er){toast('Update failed','error');}}
 }
 async function setQueuePayMethod(id,method){
   const upd={paymentStatus:'paid',paymentMethod:method};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast((method==='upi'?'📱 UPI':'💵 Cash')+' payment marked!','success');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast((method==='upi'?'📱 UPI':'💵 Cash')+' marked!','success');}catch(er){toast('Update failed','error');}}
 }
 async function undoPayment(id){
-  if(!confirm('Mark this payment as Unpaid?'))return;
+  if(!confirm('Mark as Unpaid?')) return;
   const upd={paymentStatus:'unpaid',paymentMethod:''};
-  try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Payment marked as unpaid','info');}
-  catch(er){toast('Update failed','error');}
+  if(fbDB){try{await fbDB.ref('queue/'+id).update(upd);await fbDB.ref('history/'+id).update(upd);toast('↩️ Marked unpaid','info');}catch(er){toast('Update failed','error');}}
 }
 
 function openEditModal(id){
-  const e=DB.queue.find(q=>q.id===id)||DB.history.find(h=>h.id===id);if(!e)return;
+  const e=DB.queue.find(q=>q.id===id)||DB.history.find(h=>h.id===id);
+  if(!e) return;
   editingId=id;
   document.getElementById('editVehicleNum').value=e.vehicleNum;
   document.getElementById('editPhone').value=e.phone;
@@ -1390,39 +1750,36 @@ function openEditModal(id){
   document.getElementById('editModal').style.display='flex';
 }
 function closeEditModal(){document.getElementById('editModal').style.display='none';editingId=null;}
-
 async function saveEditEntry(){
-  if(!editingId)return;
+  if(!editingId) return;
   const payStatus=document.getElementById('editPayStatus').value;
   const payMethod=document.getElementById('editPayMethod').value;
   const upd={
-    vehicleNum:(document.getElementById('editVehicleNum').value||'').trim().toUpperCase().replace(/[^A-Z0-9]/g,''),
-    phone:(document.getElementById('editPhone').value||'').trim().replace(/\D/g,''),
+    vehicleNum:(document.getElementById('editVehicleNum').value||'').trim().toUpperCase(),
+    phone:(document.getElementById('editPhone').value||'').trim(),
     name:(document.getElementById('editName').value||'').trim(),
     model:(document.getElementById('editModel').value||'').trim(),
     amount:parseFloat(document.getElementById('editAmount').value)||0,
     paymentStatus:payStatus,
     paymentMethod:payStatus==='paid'?payMethod:''
   };
-  try{
-    const qSnap=await fbDB.ref('queue/'+editingId).once('value');
-    if(qSnap.exists())await fbDB.ref('queue/'+editingId).update(upd);
-    await fbDB.ref('history/'+editingId).update(upd);
-    closeEditModal();toast('Entry updated','success');
-  }catch(er){toast('Update failed','error');}
+  if(fbDB){
+    try{const qSnap=await fbDB.ref('queue/'+editingId).once('value');if(qSnap.exists()) await fbDB.ref('queue/'+editingId).update(upd);await fbDB.ref('history/'+editingId).update(upd);closeEditModal();toast('Updated','success');}
+    catch(er){toast('Update failed','error');}
+  } else{closeEditModal();toast('Saved (local)','success');}
 }
 
 function updateLiveStats(){
   const today=todayStr();
-  const todayEntries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(today));
-  const waiting=DB.queue.filter(q=>q.status==='waiting').length;
-  const ongoing=DB.queue.filter(q=>q.status==='ongoing').length;
-  const completed=todayEntries.filter(h=>h.status==='completed').length;
-  const paid=DB.queue.filter(q=>(q.paymentStatus||'')==='paid').length;
-  const unpaid=DB.queue.filter(q=>(q.paymentStatus||'unpaid')==='unpaid').length;
-  setTxt('statWaiting',waiting);setTxt('statOngoing',ongoing);setTxt('statCompleted',completed);
-  setTxt('statPaid',paid);setTxt('statUnpaid',unpaid);
-  setTxt('q-waiting',waiting);setTxt('q-ongoing',ongoing);setTxt('q-done',completed);
+  const todayE=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(today));
+  setTxt('statWaiting',DB.queue.filter(q=>q.status==='waiting').length);
+  setTxt('statOngoing',DB.queue.filter(q=>q.status==='ongoing').length);
+  setTxt('statCompleted',todayE.filter(h=>h.status==='completed').length);
+  setTxt('statPaid',DB.queue.filter(q=>(q.paymentStatus||'')==='paid').length);
+  setTxt('statUnpaid',DB.queue.filter(q=>(q.paymentStatus||'unpaid')==='unpaid').length);
+  setTxt('q-waiting',DB.queue.filter(q=>q.status==='waiting').length);
+  setTxt('q-ongoing',DB.queue.filter(q=>q.status==='ongoing').length);
+  setTxt('q-done',todayE.filter(h=>h.status==='completed').length);
   updateQueueVehicleCounts();
 }
 
@@ -1431,38 +1788,41 @@ async function adminLogin(){
   const email=document.getElementById('adminEmail').value.trim();
   const pass=document.getElementById('adminPass').value;
   if(!email||!pass){toast('Enter email and password','error');return;}
-  const btn=document.getElementById('loginBtn');btn.disabled=true;btn.textContent='Signing in...';
+  if(!fbAuth){toast('Firebase not configured','error');return;}
+  const btn=document.getElementById('loginBtn');
+  btn.disabled=true;btn.textContent='Signing in...';
   try{
     await fbAuth.signInWithEmailAndPassword(email,pass);
     toast('Welcome, Administrator!','success');
     document.getElementById('adminPass').value='';
-  }catch(e){
+  } catch(e){
     const msg=e.code==='auth/invalid-credential'||e.code==='auth/wrong-password'||e.code==='auth/user-not-found'?'Invalid email or password':(e.message||'Login failed');
     toast(msg,'error');
-  }finally{btn.disabled=false;btn.textContent='Login to Dashboard';}
+  } finally{btn.disabled=false;btn.textContent='Login to Dashboard';}
 }
-async function adminLogout(){try{await fbAuth.signOut();toast('Logged out','info');}catch(e){}}
+async function adminLogout(){if(fbAuth) try{await fbAuth.signOut();toast('Logged out','info');}catch(e){}}
 function adminTabActive(tab){const el=document.getElementById('atab-'+tab);return el&&el.classList.contains('active');}
 
 function showAdminTab(tab,el){
   document.querySelectorAll('.admin-tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(x=>x.classList.remove('active'));
   const tabEl=document.getElementById('atab-'+tab);
-  if(tabEl)tabEl.classList.add('active');if(el)el.classList.add('active');
-  if(tab==='overview'||tab==='analytics')refreshAdminData();
-  if(tab==='queue_admin')renderQueueList('adminQueueList',true);
-  if(tab==='history')loadHistory();
-  if(tab==='workers')loadWorkers();
-  if(tab==='attendance')loadAttendance();
-  if(tab==='pricing')loadPricingAdmin();
-  if(tab==='billing_admin')loadAdminBilling();
+  if(tabEl) tabEl.classList.add('active');if(el) el.classList.add('active');
+  if(tab==='overview'||tab==='analytics') refreshAdminData();
+  if(tab==='queue_admin') renderQueueList('adminQueueList',true);
+  if(tab==='history') loadHistory();
+  if(tab==='workers') loadWorkers();
+  if(tab==='attendance') loadAttendance();
+  if(tab==='pricing'){loadPricingAdmin();renderCustomModelsList();}
+  if(tab==='billing_admin') loadAdminBilling();
+  if(tab==='customers'){document.getElementById('adminCustResults').innerHTML='<div class="empty-state"><div class="es-icon">👤</div><p>Search by customer name or mobile number above.</p></div>';}
 }
 
 const icons={type1:'🚗',type2:'🚗',type3:'🚙',type4:'🚙',bike:'🏍️',superbike:'🏍️'};
 const colors={type1:'var(--accent)',type2:'var(--purple)',type3:'var(--accent3)',type4:'var(--accent2)',bike:'var(--warn)',superbike:'var(--brand)'};
 
-function payStatusCell(e){const ps=e.paymentStatus||'unpaid';return`<span class="tag tag-${ps}">${ps==='paid'?'✅ Paid':'⏳ Unpaid'}</span>`;}
-function payMethodCell(e){const ps=e.paymentStatus||'unpaid';const pm=e.paymentMethod||'';if(ps!=='paid'||!pm)return'<span style="color:var(--text3)">—</span>';return`<span class="tag tag-${pm}">${pm==='upi'?'📱 UPI':'💵 Cash'}</span>`;}
+function payStatusCell(e){const ps=e.paymentStatus||'unpaid';return `<span class="tag tag-${ps}">${ps==='paid'?'✅ Paid':'⏳ Unpaid'}</span>`;}
+function payMethodCell(e){const ps=e.paymentStatus||'unpaid';const pm=e.paymentMethod||'';if(ps!=='paid'||!pm) return '<span style="color:var(--text3)">—</span>';return `<span class="tag tag-${pm}">${pm==='upi'?'📱 UPI':'💵 Cash'}</span>`;}
 
 function refreshAdminData(){
   const dateStr=document.getElementById('filterDate')?.value||todayStr();
@@ -1472,27 +1832,26 @@ function refreshAdminData(){
   const pending=DB.queue.filter(q=>q.status==='waiting'||q.status==='ongoing').length;
   const attDay=DB.attendance[dateStr]||{};
   const presentWorkers=Object.values(attDay).filter(a=>a.status==='present').length;
-  const paidEntries=entries.filter(h=>h.paymentStatus==='paid');
-  const upiRev=paidEntries.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
-  const cashRev=paidEntries.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
+  const paidE=entries.filter(h=>h.paymentStatus==='paid');
+  const upiRev=paidE.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
+  const cashRev=paidE.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
   const unpaidRev=entries.filter(h=>h.paymentStatus!=='paid').reduce((s,h)=>s+(h.amount||0),0);
   setTxt('ov-total',completed.length);setTxt('ov-revenue','₹'+revenue);setTxt('ov-pending',pending);
   setTxt('ov-normal',completed.filter(h=>h.washType==='normal').length);
   setTxt('ov-foam',completed.filter(h=>h.washType==='foam').length);
-  setTxt('ov-workers',presentWorkers);
-  setTxt('ov-upi','₹'+upiRev);setTxt('ov-cash','₹'+cashRev);setTxt('ov-unpaid','₹'+unpaidRev);
+  setTxt('ov-workers',presentWorkers);setTxt('ov-upi','₹'+upiRev);setTxt('ov-cash','₹'+cashRev);setTxt('ov-unpaid','₹'+unpaidRev);
   const byType={};
   ['type1','type2','type3','type4','bike','superbike'].forEach(t=>{byType[t]=completed.filter(h=>h.vehicleType===t).reduce((s,h)=>s+(h.amount||0),0);});
   const maxRev=Math.max(...Object.values(byType),1);
-  const typeLabels={type1:'Type 1',type2:'Type 2',type3:'Type 3',type4:'Type 4',bike:'Bike',superbike:'Superbike'};
+  const tl={type1:'Type 1',type2:'Type 2',type3:'Type 3',type4:'Type 4',bike:'Bike',superbike:'Superbike'};
   const revEl=document.getElementById('revenueBreakdown');
-  if(revEl)revEl.innerHTML=Object.entries(byType).map(([t,v])=>`<div class="rev-bar-item"><div class="rev-bar-label">${icons[t]} ${typeLabels[t]||t}</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:${(v/maxRev)*100}%;background:${colors[t]}"></div></div><div class="rev-bar-val">₹${v}</div></div>`).join('');
+  if(revEl) revEl.innerHTML=Object.entries(byType).map(([t,v])=>`<div class="rev-bar-item"><div class="rev-bar-label">${icons[t]} ${tl[t]}</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:${(v/maxRev)*100}%;background:${colors[t]}"></div></div><div class="rev-bar-val">₹${v}</div></div>`).join('');
   const tbody=document.getElementById('recentActivity');
   if(tbody){
     const recent=[...entries].reverse().slice(0,10);
     tbody.innerHTML=recent.map(e=>`<tr>
       <td style="font-family:'Space Mono',monospace;font-size:12px;color:var(--accent)">${e.vehicleNum}</td>
-      <td><span class="tag tag-${e.vehicleType}">${e.vehicleType}</span></td>
+      <td><span class="tag tag-${e.vehicleType}">${CAT_META[e.vehicleType]?.icon||''} ${CAT_META[e.vehicleType]?.label||e.vehicleType||''}</span></td>
       <td><span class="tag tag-${e.washType}">${e.washType}</span></td>
       <td style="font-family:'Space Mono',monospace;color:var(--accent2);font-weight:700">₹${e.amount}</td>
       <td>${payStatusCell(e)}</td><td>${payMethodCell(e)}</td>
@@ -1500,11 +1859,12 @@ function refreshAdminData(){
       <td style="font-size:11px;color:var(--text2);font-family:'Space Mono',monospace">${fmtTime(e.entryTime)}</td>
     </tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:20px">No data</td></tr>';
   }
+  // Analytics tab
   const anaEl=document.getElementById('analyticsContent');
   if(anaEl&&adminTabActive('analytics')){
     const byWash={normal:{count:0,rev:0},foam:{count:0,rev:0}};
-    completed.forEach(h=>{byWash[h.washType]&&(byWash[h.washType].count++,byWash[h.washType].rev+=h.amount||0);});
-    const typeLabels2={type1:'Type 1',type2:'Type 2',type3:'Type 3',type4:'Type 4',bike:'Bike',superbike:'Superbike'};
+    completed.forEach(h=>{byWash[h.washType].count++;byWash[h.washType].rev+=h.amount||0;});
+    const tl2={type1:'Type 1',type2:'Type 2',type3:'Type 3',type4:'Type 4',bike:'Bike',superbike:'Superbike'};
     anaEl.innerHTML=`<div class="analytics-grid" style="margin-bottom:20px">
       <div class="analytic-card"><div class="analytic-val" style="color:var(--warn)">${byWash.normal.count}</div><div class="analytic-label">Normal Washes</div><div style="font-size:12px;color:var(--text3);margin-top:3px">₹${byWash.normal.rev}</div></div>
       <div class="analytic-card"><div class="analytic-val" style="color:var(--accent)">${byWash.foam.count}</div><div class="analytic-label">Foam Washes</div><div style="font-size:12px;color:var(--text3);margin-top:3px">₹${byWash.foam.rev}</div></div>
@@ -1513,31 +1873,48 @@ function refreshAdminData(){
       <div class="analytic-card"><div class="analytic-val" style="color:var(--warn)">₹${cashRev}</div><div class="analytic-label">Cash Revenue</div></div>
       <div class="analytic-card"><div class="analytic-val" style="color:var(--danger)">₹${unpaidRev}</div><div class="analytic-label">Unpaid Amount</div></div>
     </div>
-    <div class="card"><div class="card-title">🚗 Vehicle Type Breakdown</div><div class="rev-bar-wrap">${['type1','type2','type3','type4','bike','superbike'].map(t=>{const cnt=completed.filter(h=>h.vehicleType===t).length;const rev=completed.filter(h=>h.vehicleType===t).reduce((s,h)=>s+(h.amount||0),0);return`<div class="rev-bar-item"><div class="rev-bar-label">${icons[t]} ${typeLabels2[t]} (${cnt})</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:${completed.length?(cnt/completed.length)*100:0}%;background:${colors[t]}"></div></div><div class="rev-bar-val">₹${rev}</div></div>`;}).join('')}</div></div>`;
+    <div class="card"><div class="card-title">🚗 Vehicle Type Breakdown</div><div class="rev-bar-wrap">${['type1','type2','type3','type4','bike','superbike'].map(t=>{
+      const cnt=completed.filter(h=>h.vehicleType===t).length;
+      const rev=completed.filter(h=>h.vehicleType===t).reduce((s,h)=>s+(h.amount||0),0);
+      return `<div class="rev-bar-item"><div class="rev-bar-label">${icons[t]} ${tl2[t]} (${cnt})</div><div class="rev-bar-track"><div class="rev-bar-fill" style="width:${completed.length?(cnt/completed.length)*100:0}%;background:${colors[t]}"></div></div><div class="rev-bar-val">₹${rev}</div></div>`;
+    }).join('')}</div></div>`;
   }
 }
 
-/* ── History tab vehicle filter ── */
-function selectHistVehicleTab(tab,el){
-  histVehicleTab=tab;
-  document.querySelectorAll('[id^="histTab-"]').forEach(b=>b.classList.remove('active'));
-  el.classList.add('active');
-  loadHistory();
+function loadAdminBilling(){
+  const dateStr=document.getElementById('adminBillDate')?.value||todayStr();
+  const entries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
+  const completed=entries.filter(h=>h.status==='completed');
+  const revenue=completed.reduce((s,h)=>s+(h.amount||0),0);
+  const upiRev=completed.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
+  const cashRev=completed.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
+  setTxt('ab-revenue','₹'+revenue);setTxt('ab-count',completed.length);setTxt('ab-upi','₹'+upiRev);setTxt('ab-cash','₹'+cashRev);
+  const tbody=document.getElementById('adminBillingTable');
+  if(!entries.length){tbody.innerHTML='<tr><td colspan="13" style="text-align:center;color:var(--text3);padding:24px">No records for this date</td></tr>';return;}
+  tbody.innerHTML=entries.map((e,i)=>`<tr>
+    <td style="color:var(--text3);font-size:11px">${i+1}</td>
+    <td style="font-family:'Space Mono',monospace;color:var(--accent);font-size:12px">${e.vehicleNum}</td>
+    <td>${e.name||'—'}</td><td>${e.model||'—'}</td>
+    <td><span class="tag tag-${e.vehicleType}">${CAT_META[e.vehicleType]?.icon||''} ${CAT_META[e.vehicleType]?.label||e.vehicleType||''}</span></td>
+    <td><span class="tag tag-${e.washType}">${e.washType}</span></td>
+    <td style="font-family:'Space Mono',monospace;color:var(--accent2);font-weight:700">₹${e.amount}</td>
+    <td>${payStatusCell(e)}</td><td>${payMethodCell(e)}</td>
+    <td><span class="tag tag-${e.status}">${e.status}</span></td>
+    <td style="font-size:11px">${fmtTime(e.entryTime)}</td>
+    <td style="font-size:11px">${e.endTime?fmtTime(e.endTime):'—'}</td>
+    <td><button class="btn btn-ghost btn-sm" onclick="showAdminBill('${e.id}')">🧾</button></td>
+  </tr>`).join('');
 }
 
+/* ── History with car/bike toggle ── */
 function loadHistory(){
   const dateStr=document.getElementById('histDate')?.value||todayStr();
   const search=(document.getElementById('histSearch')?.value||'').toLowerCase();
   let entries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
-  if(search)entries=entries.filter(h=>h.vehicleNum.toLowerCase().includes(search)||h.phone.includes(search)||(h.name&&h.name.toLowerCase().includes(search)));
-  // Vehicle type filter
-  if(histVehicleTab==='cars')entries=entries.filter(h=>!isBikeType(h.vehicleType));
-  else if(histVehicleTab==='bikes')entries=entries.filter(h=>isBikeType(h.vehicleType));
-  // Update counts
-  const allForDate=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
-  setTxt('hqvc-all',allForDate.length);
-  setTxt('hqvc-cars',allForDate.filter(h=>!isBikeType(h.vehicleType)).length);
-  setTxt('hqvc-bikes',allForDate.filter(h=>isBikeType(h.vehicleType)).length);
+  if(search) entries=entries.filter(h=>h.vehicleNum.toLowerCase().includes(search)||h.phone.includes(search)||(h.name&&h.name.toLowerCase().includes(search)));
+  // Vehicle tab filter
+  if(histVehicleTab==='cars') entries=entries.filter(h=>!CAT_META[h.vehicleType]?.isBike);
+  else if(histVehicleTab==='bikes') entries=entries.filter(h=>CAT_META[h.vehicleType]?.isBike);
   const tbody=document.getElementById('historyTable');
   if(!entries.length){tbody.innerHTML='<tr><td colspan="13" style="text-align:center;color:var(--text3);padding:24px">No records found</td></tr>';return;}
   tbody.innerHTML=entries.map((e,i)=>`<tr>
@@ -1546,52 +1923,25 @@ function loadHistory(){
     <td>${e.name||'—'}</td>
     <td style="font-family:'Space Mono',monospace;font-size:12px">${e.phone}</td>
     <td>${e.model||'—'}</td>
-    <td><span class="tag tag-${e.vehicleType}">${e.vehicleType}</span></td>
+    <td><span class="tag tag-${e.vehicleType}">${CAT_META[e.vehicleType]?.icon||''} ${CAT_META[e.vehicleType]?.label||e.vehicleType||''}</span></td>
     <td><span class="tag tag-${e.washType}">${e.washType}</span></td>
     <td style="font-family:'Space Mono',monospace;color:var(--accent2);font-weight:700">₹${e.amount}</td>
     <td>${payStatusCell(e)}</td><td>${payMethodCell(e)}</td>
     <td><span class="tag tag-${e.status}">${e.status}</span></td>
-    <td style="font-size:11px;color:var(--text2)">${fmtTime(e.entryTime)}</td>
-    <td style="font-size:11px;color:var(--text2)">${e.endTime?fmtTime(e.endTime):'—'}</td>
-  </tr>`).join('');
-}
-
-function loadAdminBilling(){
-  const dateStr=document.getElementById('adminBillDate')?.value||todayStr();
-  const entries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
-  const completed=entries.filter(h=>h.status==='completed');
-  const revenue=completed.reduce((s,h)=>s+(h.amount||0),0);
-  const count=completed.length;
-  const upiRev=completed.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
-  const cashRev=completed.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
-  setTxt('ab-revenue','₹'+revenue);setTxt('ab-count',count);
-  setTxt('ab-upi','₹'+upiRev);setTxt('ab-cash','₹'+cashRev);
-  const tbody=document.getElementById('adminBillingTable');
-  if(!entries.length){tbody.innerHTML='<tr><td colspan="13" style="text-align:center;color:var(--text3);padding:24px">No records for this date</td></tr>';return;}
-  tbody.innerHTML=entries.map((e,i)=>`<tr>
-    <td style="color:var(--text3);font-size:11px">${i+1}</td>
-    <td style="font-family:'Space Mono',monospace;color:var(--accent);font-size:12px">${e.vehicleNum}</td>
-    <td>${e.name||'—'}</td><td>${e.model||'—'}</td>
-    <td><span class="tag tag-${e.vehicleType}">${e.vehicleType}</span></td>
-    <td><span class="tag tag-${e.washType}">${e.washType}</span></td>
-    <td style="font-family:'Space Mono',monospace;color:var(--accent2);font-weight:700">₹${e.amount}</td>
-    <td>${payStatusCell(e)}</td><td>${payMethodCell(e)}</td>
-    <td><span class="tag tag-${e.status}">${e.status}</span></td>
-    <td style="font-size:11px;color:var(--text2)">${fmtTime(e.entryTime)}</td>
-    <td style="font-size:11px;color:var(--text2)">${e.endTime?fmtTime(e.endTime):'—'}</td>
-    <td><button class="btn btn-ghost btn-sm" onclick="showAdminBill('${e.id}')">🧾</button></td>
+    <td style="font-size:11px">${fmtTime(e.entryTime)}</td>
+    <td style="font-size:11px">${e.endTime?fmtTime(e.endTime):'—'}</td>
   </tr>`).join('');
 }
 
 function buildBillHTML(e){
   const ps=e.paymentStatus||'unpaid';const pm=e.paymentMethod||'';
   const payLine=ps==='paid'?`<div class="bill-row"><span>Payment</span><span style="color:var(--accent2);font-weight:700">✅ Paid${pm?' · '+pm.toUpperCase():''}</span></div>`:`<div class="bill-row"><span>Payment</span><span style="color:var(--danger);font-weight:700">⏳ Unpaid</span></div>`;
-  return`<div class="bill-row"><span>Bill No.</span><span style="font-family:'Space Mono',monospace;font-size:12px">${e.id}</span></div>
+  return `<div class="bill-row"><span>Bill No.</span><span style="font-family:'Space Mono',monospace;font-size:12px">${e.id}</span></div>
     <div class="bill-row"><span>Vehicle No.</span><span style="font-family:'Space Mono',monospace;color:var(--accent)">${e.vehicleNum}</span></div>
     <div class="bill-row"><span>Customer</span><span>${e.name||'—'}</span></div>
     <div class="bill-row"><span>Phone</span><span>${e.phone}</span></div>
     <div class="bill-row"><span>Model</span><span>${e.model||'—'}</span></div>
-    <div class="bill-row"><span>Vehicle Type</span><span>${(CAT_META[e.vehicleType]?.icon||'🚗')} ${(CAT_META[e.vehicleType]?.label||e.vehicleType||'').toUpperCase()}</span></div>
+    <div class="bill-row"><span>Vehicle Type</span><span>${CAT_META[e.vehicleType]?.icon||'🚗'} ${(CAT_META[e.vehicleType]?.label||e.vehicleType||'').toUpperCase()}</span></div>
     <div class="bill-row"><span>Service</span><span>${e.washType==='foam'?'🫧 Foam Wash':'💧 Normal Wash'}</span></div>
     ${e.startTime?`<div class="bill-row"><span>Started</span><span style="font-size:12px">${fmtTime(e.startTime)}</span></div>`:''}
     ${e.endTime?`<div class="bill-row"><span>Completed</span><span style="font-size:12px">${fmtTime(e.endTime)}</span></div>`:''}
@@ -1600,96 +1950,187 @@ function buildBillHTML(e){
 }
 
 function showAdminBill(id){
-  const e=DB.history.find(h=>h.id===id);if(!e)return;
+  const e=DB.history.find(h=>h.id===id);if(!e) return;
   const card=document.getElementById('modalBillCard');
-  card.innerHTML=`<div class="bill-header"><img src="logo.png" class="bill-logo-img" alt="Easter Group"><div class="bill-logo-text">Easter Car Wash</div><div style="font-size:11px;color:var(--text2);margin-top:4px">Quality Wash Service · Easter Group</div><div style="font-size:11px;color:var(--text3);margin-top:6px">${new Date(e.entryTime).toLocaleString('en-IN')}</div></div>${buildBillHTML(e)}<div class="bill-footer">Thank you for choosing Easter Car Wash!<br>Visit again 🚗✨</div>`;
+  card.innerHTML=`<div class="bill-header"><div class="bill-logo-text">Easter Car Wash</div><div style="font-size:11px;color:var(--text2);margin-top:4px">Quality Wash Service · Easter Group</div><div style="font-size:11px;color:var(--text3);margin-top:6px">${new Date(e.entryTime).toLocaleString('en-IN')}</div></div>${buildBillHTML(e)}<div class="bill-footer">Thank you for choosing Easter Car Wash!<br>Visit again 🚗✨</div>`;
   document.getElementById('billModal').style.display='flex';
 }
+
 function printModalBill(){const html=document.getElementById('modalBillCard').outerHTML;openPrintWindow(html);}
 function openPrintWindow(html){
-  const logoSrc=new URL('logo.png',window.location.href).href;
-  const withLogo=html.replace(/src="logo\.png"/g,`src="${logoSrc}"`);
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><title>Easter Car Wash Bill</title><style>body{font-family:sans-serif;padding:24px;max-width:380px;margin:0 auto;color:#111}.bill-logo-img{height:50px;display:block;margin:0 auto 6px}.bill-logo-text{font-size:18px;font-weight:bold;text-align:center;margin-bottom:4px}.bill-header{text-align:center;padding-bottom:12px;border-bottom:1px dashed #ccc;margin-bottom:14px}.bill-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid #f0f0f0}.bill-row.total{font-weight:bold;font-size:15px;border-top:1px dashed #ccc;padding-top:10px;margin-top:8px;border-bottom:none;color:#16a34a}.bill-footer{text-align:center;margin-top:14px;font-size:11px;color:#888;border-top:1px dashed #ccc;padding-top:12px}</style></head><body>${withLogo}<script>window.onload=function(){setTimeout(function(){window.print();window.close();},300);}<\/script></body></html>`);
+  win.document.write(`<!DOCTYPE html><html><head><title>Easter Car Wash Bill</title><style>body{font-family:sans-serif;padding:24px;max-width:380px;margin:0 auto;color:#111}.bill-logo-text{font-size:18px;font-weight:bold;text-align:center;margin-bottom:4px}.bill-header{text-align:center;padding-bottom:12px;border-bottom:1px dashed #ccc;margin-bottom:14px}.bill-row{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid #f0f0f0}.bill-row.total{font-weight:bold;font-size:15px;border-top:1px dashed #ccc;padding-top:10px;margin-top:8px;border-bottom:none;color:#16a34a}.bill-footer{text-align:center;margin-top:14px;font-size:11px;color:#888;border-top:1px dashed #ccc;padding-top:12px}</style></head><body>${html}<script>window.onload=function(){setTimeout(function(){window.print();window.close();},300);}<\/script></body></html>`);
   win.document.close();
 }
 
+/* ── Workers ── */
 function loadWorkers(){
-  const grid=document.getElementById('workersGrid');if(!grid)return;
+  const grid=document.getElementById('workersGrid');if(!grid) return;
   const today=todayStr();
-  const secLabel={car:'🚗 Car Section',bike:'🏍️ Bike Section',both:'🔄 Both Sections'};
-  const secCls={car:'wsb-car',bike:'wsb-bike',both:'wsb-both'};
+  const secLabel={car:'🚗 Car',bike:'🏍️ Bike',both:'🔄 Both',none:'✗ Off'};
+  const defSecLabel={car:'🚗 Car',bike:'🏍️ Bike',both:'🔄 Both'};
+  if(!DB.workers.length){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">👷</div><p>No workers added yet.</p></div>';return;}
   grid.innerHTML=DB.workers.map(w=>{
-    const att=(DB.attendance[today]||{})[w.id];
+    const att=(DB.attendance[today]||{})[w.id]||{};
+    const todaySec=att.section||'';
     const initials=w.name.split(' ').map(n=>n[0]).join('').toUpperCase().slice(0,2);
-    const sec=w.section||'';
-    const secBadge=sec?`<div class="worker-section-badge ${secCls[sec]||'wsb-both'}">${secLabel[sec]||sec}</div>`:'';
-    return`<div class="worker-card"><div class="worker-avatar">${initials}</div><div class="worker-name">${w.name}</div><div class="worker-role">${w.role}</div>${secBadge}<div style="font-size:12px;color:var(--text2);margin-bottom:10px">📞 ${w.phone}</div><div style="font-size:13px;margin-bottom:14px"><span class="att-dot ${att?.status==='present'?'dot-present':'dot-absent'}"></span><span style="color:${att?.status==='present'?'var(--accent2)':'var(--danger)'};font-weight:600">${att?.status==='present'?'Present':'Absent'}</span></div><button class="btn btn-ghost btn-sm" style="width:100%;justify-content:center" onclick="deleteWorker('${w.id}')">🗑️ Remove</button></div>`;
-  }).join('')||'<div class="empty-state"><div class="es-icon">👷</div><p>No workers added yet</p></div>';
+    return `<div class="worker-card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
+        <div class="worker-avatar" style="margin-bottom:0">${initials}</div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="openEditWorker('${w.id}')">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteWorker('${w.id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="worker-name">${w.name}</div>
+      <div class="worker-role">${w.role}</div>
+      <div style="font-size:12px;color:var(--text2);margin-bottom:8px">📞 ${w.phone||'—'}</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Today: ${todaySec?secLabel[todaySec]:'Not set'}</div>
+      <div style="font-size:13px;margin-bottom:12px"><span class="att-dot ${att.status==='present'?'dot-present':'dot-absent'}"></span><span style="color:${att.status==='present'?'var(--accent2)':'var(--danger)'};font-weight:600">${att.status||'absent'}</span></div>
+      <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;margin-bottom:6px" onclick="openDailySection('${w.id}')">📋 Set Today's Section</button>
+    </div>`;
+  }).join('');
 }
 
 function loadAttendance(){
   const dateStr=document.getElementById('attDate')?.value||todayStr();
-  const tbody=document.getElementById('attendanceTable');if(!tbody)return;
-  if(!DB.workers.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:24px">No workers registered</td></tr>';return;}
+  const tbody=document.getElementById('attendanceTable');if(!tbody) return;
+  if(!DB.workers.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px">No workers</td></tr>';return;}
+  const secLabel={car:'🚗 Car',bike:'🏍️ Bike',both:'🔄 Both',none:'✗ Off',''：'—'};
   tbody.innerHTML=DB.workers.map(w=>{
-    const att=(DB.attendance[dateStr]||{})[w.id]||{status:'absent',checkIn:null,checkOut:null};
-    return`<tr><td><strong>${w.name}</strong></td><td style="color:var(--text2)">${w.role}</td><td style="font-family:'Space Mono',monospace;font-size:12px">${att.checkIn||'—'}</td><td style="font-family:'Space Mono',monospace;font-size:12px">${att.checkOut||'—'}</td><td><span class="att-dot ${att.status==='present'?'dot-present':'dot-absent'}"></span><span style="color:${att.status==='present'?'var(--accent2)':'var(--danger)'};font-weight:600">${att.status}</span></td><td><div style="display:flex;gap:6px">${att.status!=='present'?`<button class="btn btn-success btn-sm" onclick="markAttendance('${w.id}','present','${dateStr}')">✅ In</button>`:`<button class="btn btn-ghost btn-sm" onclick="markAttendance('${w.id}','checkout','${dateStr}')">🚪 Out</button>`}<button class="btn btn-danger btn-sm" onclick="markAttendance('${w.id}','absent','${dateStr}')">✗</button></div></td></tr>`;
+    const att=(DB.attendance[dateStr]||{})[w.id]||{status:'absent',checkIn:null,checkOut:null,section:''};
+    const todaySec=att.section||'';
+    const isToday=dateStr===todayStr();
+    const secBtn=isToday?`<button class="btn btn-ghost btn-sm" onclick="openDailySectionForDate('${w.id}','${dateStr}')" style="margin-left:6px;padding:3px 8px;font-size:11px">✏️</button>`:'';
+    return `<tr>
+      <td><strong>${w.name}</strong></td>
+      <td style="color:var(--text2)">${w.role}</td>
+      <td>${todaySec||'—'}${secBtn}</td>
+      <td style="font-family:'Space Mono',monospace;font-size:12px">${att.checkIn||'—'}</td>
+      <td style="font-family:'Space Mono',monospace;font-size:12px">${att.checkOut||'—'}</td>
+      <td><span class="att-dot ${att.status==='present'?'dot-present':'dot-absent'}"></span><span style="color:${att.status==='present'?'var(--accent2)':'var(--danger)'};font-weight:600">${att.status}</span></td>
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${att.status!=='present'?`<button class="btn btn-success btn-sm" onclick="markAttendance('${w.id}','present','${dateStr}')">✅ In</button>`:`<button class="btn btn-ghost btn-sm" onclick="markAttendance('${w.id}','checkout','${dateStr}')">🚪 Out</button>`}
+        <button class="btn btn-danger btn-sm" onclick="markAttendance('${w.id}','absent','${dateStr}')">✗ Absent</button>
+      </div></td>
+    </tr>`;
   }).join('');
 }
 
 async function markAttendance(wId,action,dateStr){
   const now=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  const cur=(DB.attendance[dateStr]||{})[wId]||{};
+  const keepSection=cur.section||'';
   let data;
-  if(action==='present')data={status:'present',checkIn:now,checkOut:null};
-  else if(action==='checkout'){const cur=(DB.attendance[dateStr]||{})[wId]||{};data={status:'present',checkIn:cur.checkIn||now,checkOut:now};}
-  else data={status:'absent',checkIn:null,checkOut:null};
-  try{await fbDB.ref('attendance/'+dateStr+'/'+wId).set(data);toast('Attendance updated','success');}
-  catch(e){toast('Update failed','error');}
+  if(action==='present') data={status:'present',checkIn:now,checkOut:null,section:keepSection};
+  else if(action==='checkout') data={status:'present',checkIn:cur.checkIn||now,checkOut:now,section:keepSection};
+  else data={status:'absent',checkIn:null,checkOut:null,section:keepSection};
+  if(fbDB){try{await fbDB.ref('attendance/'+dateStr+'/'+wId).set(data);toast('Updated','success');}catch(e){toast('Update failed','error');}}
+  else{if(!DB.attendance[dateStr]) DB.attendance[dateStr]={};DB.attendance[dateStr][wId]=data;loadAttendance();}
 }
+
 async function markAllPresent(){
   const dateStr=document.getElementById('attDate')?.value||todayStr();
   const now=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
   const updates={};
-  DB.workers.forEach(w=>{
-    const cur=(DB.attendance[dateStr]||{})[w.id];
-    if(!cur||cur.status!=='present')updates[dateStr+'/'+w.id]={status:'present',checkIn:now,checkOut:null};
-  });
-  try{await fbDB.ref('attendance').update(updates);toast('All workers marked present','success');}
-  catch(e){toast('Update failed','error');}
+  DB.workers.forEach(w=>{const cur=(DB.attendance[dateStr]||{})[w.id]||{};if(cur.status!=='present') updates[dateStr+'/'+w.id]={status:'present',checkIn:now,checkOut:null,section:cur.section||w.section||''};});
+  if(fbDB){try{await fbDB.ref('attendance').update(updates);toast('All present','success');}catch(e){toast('Update failed','error');}}
 }
-async function deleteWorker(id){if(!confirm('Remove this worker?'))return;try{await fbDB.ref('workers/'+id).remove();}catch(e){toast('Remove failed','error');}}
-function showAddWorker(){selectedWorkerSection='';['wSecCar','wSecBike','wSecBoth'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='pay-method-btn';});document.getElementById('workerModal').style.display='flex';}
+
+async function deleteWorker(id){if(!confirm('Remove worker?')) return;if(fbDB) try{await fbDB.ref('workers/'+id).remove();}catch(e){toast('Remove failed','error');}}
+
+function showAddWorker(){
+  selectedWorkerSection='';
+  document.getElementById('workerModalTitle').textContent='➕ Add Worker';
+  document.getElementById('workerSaveBtn').textContent='Add Worker';
+  document.getElementById('wEditId').value='';
+  ['wName','wRole','wPhone'].forEach(id=>{const el=document.getElementById(id);if(el) el.value='';});
+  ['wSecCar','wSecBike','wSecBoth'].forEach(id=>{const el=document.getElementById(id);if(el) el.className='pay-method-btn';});
+  document.getElementById('workerModal').style.display='flex';
+}
+function openEditWorker(wId){
+  const w=DB.workers.find(x=>x.id===wId);if(!w) return;
+  selectedWorkerSection=w.section||'';
+  document.getElementById('workerModalTitle').textContent='✏️ Edit Worker';
+  document.getElementById('workerSaveBtn').textContent='Save Changes';
+  document.getElementById('wEditId').value=wId;
+  document.getElementById('wName').value=w.name||'';
+  document.getElementById('wRole').value=w.role||'';
+  document.getElementById('wPhone').value=w.phone||'';
+  ['wSecCar','wSecBike','wSecBoth'].forEach(id=>{const el=document.getElementById(id);if(el) el.className='pay-method-btn';});
+  const secMap={car:'wSecCar',bike:'wSecBike',both:'wSecBoth'};
+  const activeId=secMap[w.section];if(activeId){const el=document.getElementById(activeId);if(el) el.className='pay-method-btn sel-upi';}
+  document.getElementById('workerModal').style.display='flex';
+}
 function closeWorkerModal(){document.getElementById('workerModal').style.display='none';}
 function selectWorkerSection(sec,el){
   selectedWorkerSection=sec;
-  ['wSecCar','wSecBike','wSecBoth'].forEach(id=>{const btn=document.getElementById(id);if(btn)btn.className='pay-method-btn';});
-  const cls=sec==='car'?'sel-upi':sec==='bike'?'sel-cash':'sel-upi';
-  if(el)el.className='pay-method-btn '+cls;
+  ['wSecCar','wSecBike','wSecBoth'].forEach(id=>{const btn=document.getElementById(id);if(btn) btn.className='pay-method-btn';});
+  if(el) el.className='pay-method-btn sel-upi';
 }
 async function saveWorker(){
+  const editId=document.getElementById('wEditId').value.trim();
   const name=document.getElementById('wName').value.trim();
   const role=document.getElementById('wRole').value.trim();
   const phone=document.getElementById('wPhone').value.trim();
   if(!name){toast('Name is required','error');return;}
   if(!selectedWorkerSection){toast('Please select a section','error');return;}
-  const id='w'+Date.now();
-  const w={id,name,role:role||'Washer',phone:phone||'—',section:selectedWorkerSection};
-  try{await fbDB.ref('workers/'+id).set(w);closeWorkerModal();toast('Worker added!','success');['wName','wRole','wPhone'].forEach(x=>{document.getElementById(x).value='';});selectedWorkerSection='';}
-  catch(e){toast('Save failed','error');}
+  const w={name,role:role||'Washer',phone:phone||'—',section:selectedWorkerSection};
+  if(fbDB){
+    try{
+      if(editId){w.id=editId;await fbDB.ref('workers/'+editId).update(w);toast('Updated!','success');}
+      else{const id='w'+Date.now();w.id=id;await fbDB.ref('workers/'+id).set(w);toast('Worker added!','success');}
+      closeWorkerModal();
+    }catch(e){toast('Save failed','error');}
+  } else{closeWorkerModal();toast('Saved (local)','success');}
 }
 
+let _dsmWorkerId=null,_dsmDate=null,_dsmSelected=null;
+function openDailySection(wId){openDailySectionForDate(wId,todayStr());}
+function openDailySectionForDate(wId,dateStr){
+  const w=DB.workers.find(x=>x.id===wId);if(!w) return;
+  _dsmWorkerId=wId;_dsmDate=dateStr;_dsmSelected=null;
+  document.getElementById('dsmWorkerId').value=wId;
+  document.getElementById('dsmWorkerName').textContent='👷 '+w.name+' — '+dateStr;
+  ['dsmCar','dsmBike','dsmBoth','dsmNone'].forEach(id=>{const el=document.getElementById(id);if(el){el.className='pay-method-btn';el.style.padding='14px';el.style.cursor='pointer';el.style.textAlign='center';el.style.fontSize='14px';}});
+  document.getElementById('dsmNone').style.borderColor='var(--danger)';document.getElementById('dsmNone').style.color='var(--danger)';
+  const cur=(DB.attendance[dateStr]||{})[wId]?.section||'';if(cur) selectDSM(cur);
+  document.getElementById('dailySectionModal').style.display='flex';
+}
+function selectDSM(sec){
+  _dsmSelected=sec;
+  const map={car:'dsmCar',bike:'dsmBike',both:'dsmBoth',none:'dsmNone'};
+  ['dsmCar','dsmBike','dsmBoth','dsmNone'].forEach(id=>{const el=document.getElementById(id);if(el){el.style.borderColor='';el.style.color='';el.style.background='';}});
+  const el=document.getElementById(map[sec]);
+  if(el){if(sec==='none'){el.style.borderColor='var(--danger)';el.style.color='var(--danger)';el.style.background='rgba(240,82,82,0.1)';}else{el.style.borderColor='var(--accent2)';el.style.color='var(--accent2)';el.style.background='rgba(34,217,138,0.1)';}}
+}
+async function saveDailySection(){
+  if(!_dsmWorkerId||!_dsmDate) return;
+  if(!_dsmSelected){toast('Please select a section','error');return;}
+  if(fbDB){
+    try{
+      const cur=(DB.attendance[_dsmDate]||{})[_dsmWorkerId]||{};
+      await fbDB.ref('attendance/'+_dsmDate+'/'+_dsmWorkerId).update({section:_dsmSelected,status:_dsmSelected==='none'?'absent':(cur.status||'absent'),checkIn:cur.checkIn||null,checkOut:cur.checkOut||null});
+      document.getElementById('dailySectionModal').style.display='none';toast('Section updated','success');
+    }catch(e){toast('Save failed','error');}
+  } else{document.getElementById('dailySectionModal').style.display='none';toast('Saved (local)','success');}
+}
+
+/* ── Pricing ── */
 function loadPricingAdmin(){
   const cats=[
-    {key:'type1',label:'Type 1 Car',icon:'🚗'},{key:'type2',label:'Type 2 Car',icon:'🚗'},
-    {key:'type3',label:'Type 3 SUV',icon:'🚙'},{key:'type4',label:'Type 4 SUV',icon:'🚙'},
-    {key:'bike',label:'Bike (Two Wheeler)',icon:'🏍️'},{key:'superbike',label:'Superbike / Royal Enfield',icon:'🏍️'},
+    {key:'type1',label:'Type 1 Car',icon:'🚗'},
+    {key:'type2',label:'Type 2 Car',icon:'🚗'},
+    {key:'type3',label:'Type 3 SUV',icon:'🚙'},
+    {key:'type4',label:'Type 4 SUV',icon:'🚙'},
+    {key:'bike',label:'Bike',icon:'🏍️'},
+    {key:'superbike',label:'Superbike',icon:'🏍️'},
   ];
   const container=document.getElementById('normalPriceGrid');
   const foamContainer=document.getElementById('foamPriceGrid');
-  if(container)container.innerHTML=cats.map(c=>`<div class="price-item"><div class="field-label" style="margin-bottom:7px">${c.icon} ${c.label}</div><input type="number" class="field-input" id="price-normal-${c.key}" value="${(DB.pricing[c.key]||{}).normal||0}" style="font-family:'Space Mono',monospace;color:var(--accent2);font-size:16px;font-weight:700"></div>`).join('');
-  // Foam available for ALL types including bikes now
-  if(foamContainer)foamContainer.innerHTML=cats.map(c=>`<div class="price-item"><div class="field-label" style="margin-bottom:7px">${c.icon} ${c.label}</div><input type="number" class="field-input" id="price-foam-${c.key}" value="${(DB.pricing[c.key]||{}).foam||0}" style="font-family:'Space Mono',monospace;color:var(--accent2);font-size:16px;font-weight:700"></div>`).join('');
+  // Normal wash only for cars (bikes don't have normal wash)
+  if(container) container.innerHTML=cats.filter(c=>!['bike','superbike'].includes(c.key)).map(c=>`<div class="price-item"><div class="field-label" style="margin-bottom:7px">${c.icon} ${c.label}</div><input type="number" class="field-input" id="price-normal-${c.key}" value="${(DB.pricing[c.key]||{}).normal||0}" style="font-family:'Space Mono',monospace;color:var(--accent2);font-size:16px;font-weight:700"></div>`).join('');
+  if(foamContainer) foamContainer.innerHTML=cats.map(c=>`<div class="price-item"><div class="field-label" style="margin-bottom:7px">${c.icon} ${c.label}</div><input type="number" class="field-input" id="price-foam-${c.key}" value="${(DB.pricing[c.key]||{}).foam||0}" style="font-family:'Space Mono',monospace;color:var(--accent2);font-size:16px;font-weight:700"></div>`).join('');
 }
 
 async function savePricing(){
@@ -1698,130 +2139,299 @@ async function savePricing(){
   cats.forEach(k=>{
     const nEl=document.getElementById('price-normal-'+k);
     const fEl=document.getElementById('price-foam-'+k);
-    newPricing[k]={normal:nEl?(parseFloat(nEl.value)||0):(DB.pricing[k]?.normal||0),foam:fEl?(parseFloat(fEl.value)||0):(DB.pricing[k]?.foam||0)};
+    newPricing[k]={
+      normal:nEl?(parseFloat(nEl.value)||0):(DB.pricing[k]?.normal||0),
+      foam:fEl?(parseFloat(fEl.value)||0):(DB.pricing[k]?.foam||0)
+    };
+    // For bikes, normal = foam (only foam wash)
+    if(k==='bike'||k==='superbike') newPricing[k].normal=newPricing[k].foam;
   });
-  try{await fbDB.ref('pricing').set(newPricing);toast('Pricing updated!','success');}
-  catch(e){toast('Save failed: '+(e.message||'err'),'error');}
+  if(fbDB){try{await fbDB.ref('pricing').set(newPricing);toast('Pricing updated!','success');}catch(e){toast('Save failed','error');}}
+  else{DB.pricing=newPricing;toast('Saved (local)','success');}
+}
+
+/* ── Model browser ── */
+let _modelBrowserCat='all',_modelBrowserOpen=false;
+function toggleModelBrowser(){
+  _modelBrowserOpen=!_modelBrowserOpen;
+  document.getElementById('modelBrowserWrap').style.display=_modelBrowserOpen?'block':'none';
+  document.getElementById('modelBrowserToggleIcon').textContent=_modelBrowserOpen?'▲ Hide':'▼ Show';
+  if(_modelBrowserOpen) renderBuiltinModels();
+}
+function setModelBrowserCat(cat,el){
+  _modelBrowserCat=cat;
+  document.querySelectorAll('.mbf-btn').forEach(b=>b.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderBuiltinModels();
+}
+function renderBuiltinModels(){
+  const el=document.getElementById('builtinModelsList');if(!el) return;
+  const search=(document.getElementById('modelBrowserSearch')?.value||'').trim().toUpperCase();
+  const catColors={type1:'var(--accent)',type2:'var(--purple)',type3:'var(--accent3)',type4:'var(--accent2)',bike:'var(--warn)',superbike:'var(--brand)'};
+  const catLabels={type1:'Type 1 Car',type2:'Type 2 Car',type3:'Type 3 SUV',type4:'Type 4 SUV',bike:'Bike',superbike:'Superbike'};
+  const catIcons={type1:'🚗',type2:'🚗',type3:'🚙',type4:'🚙',bike:'🏍️',superbike:'🏍️'};
+  const allModels=getAllModels();
+  const entries=Object.entries(allModels).filter(([m,c])=>(_modelBrowserCat==='all'||c===_modelBrowserCat)&&(!search||m.includes(search))).sort((a,b)=>a[0].localeCompare(b[0]));
+  if(!entries.length){el.innerHTML='<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px">No models found.</div>';return;}
+  const groups={};
+  entries.forEach(([model,cat])=>{if(!groups[cat]) groups[cat]=[];groups[cat].push(model);});
+  const isCustom=m=>!!(DB.customModels&&DB.customModels[m.replace(/ /g,'_')]);
+  el.innerHTML=Object.entries(groups).sort((a,b)=>Object.keys(catLabels).indexOf(a[0])-Object.keys(catLabels).indexOf(b[0])).map(([cat,models])=>`
+    <div style="margin-bottom:18px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:0.8px;text-transform:uppercase;color:${catColors[cat]};margin-bottom:10px">${catIcons[cat]} ${catLabels[cat]} (${models.length})</div>
+      <div style="display:flex;flex-wrap:wrap;gap:7px">
+        ${models.map(m=>{
+          const custom=isCustom(m);
+          const display=m.charAt(0)+m.slice(1).toLowerCase();
+          return `<div style="display:inline-flex;align-items:center;gap:4px;background:var(--surface2);border:1.5px solid ${custom?catColors[cat]:'var(--border)'};border-radius:20px;padding:4px 10px 4px 12px;font-size:12px;font-weight:700">
+            <span>${display}</span>
+            ${custom?'<span style="font-size:9px;color:var(--accent2);font-weight:900;margin-left:2px">★</span>':''}
+            <span onclick="openModelEdit('${m}','${cat}')" style="cursor:pointer;color:var(--accent);font-size:12px;line-height:1;margin-left:3px;padding:1px 3px;border-radius:4px">✏️</span>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+}
+
+let _editingModel=null,_editingIsCustom=false;
+function openModelEdit(model,currentCat){
+  _editingModel=model;
+  const customKey=model.replace(/ /g,'_');
+  _editingIsCustom=!!(DB.customModels&&DB.customModels[customKey]!==undefined);
+  document.getElementById('modelEditOriginal').value=model;
+  document.getElementById('modelEditNameInput').value=model;
+  document.getElementById('modelEditCat').value=currentCat;
+  document.getElementById('modelEditBuiltinNote').style.display=_editingIsCustom?'none':'block';
+  document.getElementById('modelEditModal').style.display='flex';
+}
+async function saveModelEdit(){
+  if(!_editingModel) return;
+  const original=document.getElementById('modelEditOriginal').value.trim().toUpperCase();
+  const newName=(document.getElementById('modelEditNameInput').value||'').trim().toUpperCase();
+  const newCat=document.getElementById('modelEditCat').value;
+  if(!newName){toast('Name cannot be empty','error');return;}
+  const oldKey=original.replace(/ /g,'_');
+  const newKey=newName.replace(/ /g,'_');
+  if(fbDB){
+    try{
+      const updates={};
+      if(oldKey!==newKey){updates['customModels/'+oldKey]=null;updates['deletedModels/'+oldKey]=true;}
+      updates['customModels/'+newKey]=newCat;updates['deletedModels/'+newKey]=null;
+      await fbDB.ref().update(updates);
+      document.getElementById('modelEditModal').style.display='none';toast('Saved ✅','success');renderBuiltinModels();
+    }catch(e){toast('Save failed','error');}
+  } else{document.getElementById('modelEditModal').style.display='none';toast('Saved (local)','success');}
+}
+async function deleteModelEntry(){
+  const original=document.getElementById('modelEditOriginal').value.trim().toUpperCase();
+  if(!original||!confirm('Delete "'+original+'"?')) return;
+  const key=original.replace(/ /g,'_');
+  if(fbDB){
+    try{const updates={};updates['deletedModels/'+key]=true;updates['customModels/'+key]=null;await fbDB.ref().update(updates);document.getElementById('modelEditModal').style.display='none';toast('Deleted','info');renderBuiltinModels();}
+    catch(e){toast('Delete failed','error');}
+  }
+}
+async function addCustomModel(){
+  const name=(document.getElementById('newModelName').value||'').trim().toUpperCase();
+  const cat=document.getElementById('newModelCat').value;
+  if(!name){toast('Enter a model name','error');return;}
+  if(!cat){toast('Select a category','error');return;}
+  const key=name.replace(/[^A-Z0-9 ]/g,'').replace(/ /g,'_');
+  if(fbDB){try{await fbDB.ref('customModels/'+key).set(cat);document.getElementById('newModelName').value='';toast('Model added!','success');}catch(e){toast('Save failed','error');}}
+  else{DB.customModels[key]=cat;document.getElementById('newModelName').value='';renderCustomModelsList();toast('Added (local)','success');}
+}
+async function deleteCustomModel(key){
+  if(!confirm('Remove this model?')) return;
+  if(fbDB){try{await fbDB.ref('customModels/'+key).remove();toast('Removed','info');}catch(e){toast('Remove failed','error');}}
+}
+function renderCustomModelsList(){
+  const el=document.getElementById('customModelsList');if(!el) return;
+  const entries=Object.entries(DB.customModels||{});
+  const catLabels={type1:'🚗 T1',type2:'🚗 T2',type3:'🚙 T3',type4:'🚙 T4',bike:'🏍️ Bike',superbike:'🏍️ Superbike'};
+  if(!entries.length){el.innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px">No custom models yet.</div>';return;}
+  el.innerHTML=entries.map(([key,cat])=>`<div style="display:inline-flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700;margin:3px">
+    <span>${key.replace(/_/g,' ')}</span><span style="color:var(--text3)">${catLabels[cat]||cat}</span>
+    <span onclick="deleteCustomModel('${key}')" style="cursor:pointer;color:var(--danger);font-size:14px;line-height:1">✕</span>
+  </div>`).join('');
 }
 
 async function saveSettings(){
   const pass=document.getElementById('setPass').value.trim();
   if(!pass){toast('Enter a new password','info');return;}
-  if(pass.length<6){toast('Password must be at least 6 characters','error');return;}
+  if(pass.length<6){toast('Min 6 characters','error');return;}
+  if(!fbAuth||!fbAuth.currentUser){toast('Not logged in','error');return;}
   try{await fbAuth.currentUser.updatePassword(pass);document.getElementById('setPass').value='';toast('Password updated!','success');}
-  catch(e){const msg=e.code==='auth/requires-recent-login'?'Please log out and log in again before changing password':(e.message||'Update failed');toast(msg,'error');}
+  catch(e){toast(e.code==='auth/requires-recent-login'?'Log out and back in first':(e.message||'Failed'),'error');}
 }
-
 async function saveTimeConfig(){
   const tc={normal:parseInt(document.getElementById('timeNormal').value)||15,foam:parseInt(document.getElementById('timeFoam').value)||25};
-  try{await fbDB.ref('timeConfig').set(tc);toast('Time config saved!','success');}
-  catch(e){toast('Save failed','error');}
+  if(fbDB){try{await fbDB.ref('timeConfig').set(tc);toast('Saved!','success');}catch(e){toast('Save failed','error');}}
+  else{DB.timeConfig=tc;toast('Saved (local)','success');}
 }
-
 async function clearDayData(){
-  if(!confirm("Clear all today's data? This cannot be undone."))return;
+  if(!confirm("Clear all today's data?")) return;
   const today=todayStr();
   const toDel=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(today));
-  const updates={};
-  toDel.forEach(e=>{updates['queue/'+e.id]=null;updates['history/'+e.id]=null;});
-  try{await fbDB.ref().update(updates);toast("Today's data cleared",'info');}
-  catch(e){toast('Clear failed','error');}
+  if(fbDB){
+    const updates={};toDel.forEach(e=>{updates['queue/'+e.id]=null;updates['history/'+e.id]=null;});
+    try{await fbDB.ref().update(updates);toast("Today's data cleared",'info');}catch(e){toast('Clear failed','error');}
+  } else{DB.queue=[];DB.history=DB.history.filter(h=>!h.entryTime||!h.entryTime.startsWith(today));refreshQueueDisplay();toast("Cleared",'info');}
 }
 
-/* ── Exports ── */
+/* ── PDF Export: SEPARATE CARS AND BIKES with individual totals ── */
 function exportDailyPDF(){
   const dateStr=document.getElementById('filterDate')?.value||todayStr();
   const entries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
-  
-  // Split into cars and bikes
-  const carEntries=entries.filter(h=>!isBikeType(h.vehicleType));
-  const bikeEntries=entries.filter(h=>isBikeType(h.vehicleType));
-  
-  const carCompleted=carEntries.filter(h=>h.status==='completed');
-  const bikeCompleted=bikeEntries.filter(h=>h.status==='completed');
-  const carRevenue=carCompleted.reduce((s,h)=>s+(h.amount||0),0);
-  const bikeRevenue=bikeCompleted.reduce((s,h)=>s+(h.amount||0),0);
-  const totalRevenue=carRevenue+bikeRevenue;
-  
-  const carUpiRev=carCompleted.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
-  const carCashRev=carCompleted.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
-  const bikeUpiRev=bikeCompleted.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
-  const bikeCashRev=bikeCompleted.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
-  
+  const allCars=entries.filter(h=>!CAT_META[h.vehicleType]?.isBike);
+  const allBikes=entries.filter(h=>CAT_META[h.vehicleType]?.isBike);
+  const completedCars=allCars.filter(h=>h.status==='completed');
+  const completedBikes=allBikes.filter(h=>h.status==='completed');
+  const carRev=completedCars.reduce((s,h)=>s+(h.amount||0),0);
+  const bikeRev=completedBikes.reduce((s,h)=>s+(h.amount||0),0);
+  const totalRev=carRev+bikeRev;
+  const upiRev=entries.filter(h=>h.paymentMethod==='upi'&&h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
+  const cashRev=entries.filter(h=>h.paymentMethod==='cash'&&h.status==='completed').reduce((s,h)=>s+(h.amount||0),0);
   const attDay=DB.attendance[dateStr]||{};
+  const presentWorkers=DB.workers.filter(w=>attDay[w.id]?.status==='present');
   const vtLabel={type1:'Type 1',type2:'Type 2',type3:'Type 3',type4:'Type 4',bike:'Bike',superbike:'Superbike'};
 
-  function buildTable(list,colorHex){
-    if(!list.length)return'<tr><td colspan="12" style="text-align:center;padding:16px;color:#999">No entries</td></tr>';
-    return list.map((e,i)=>`<tr><td>${i+1}</td><td>${e.vehicleNum}</td><td>${e.name||'—'}</td><td>${e.phone}</td><td>${e.model||'—'}</td><td>${vtLabel[e.vehicleType]||e.vehicleType}</td><td>${e.washType}</td><td>₹${e.amount}</td><td>${e.paymentStatus||'unpaid'}</td><td>${e.paymentMethod||'—'}</td><td>${e.status}</td><td>${fmtTime(e.entryTime)}</td></tr>`).join('');
+  function buildTableRows(list){
+    if(!list.length) return '<tr><td colspan="11" style="text-align:center;padding:14px;color:#999">No entries</td></tr>';
+    return list.map((e,i)=>`<tr>
+      <td>${i+1}</td>
+      <td>${e.vehicleNum}</td>
+      <td>${e.name||'—'}</td>
+      <td>${e.phone}</td>
+      <td>${e.model||'—'}</td>
+      <td>${vtLabel[e.vehicleType]||e.vehicleType}</td>
+      <td>${e.washType}</td>
+      <td>₹${e.amount}</td>
+      <td>${e.paymentStatus||'unpaid'}</td>
+      <td>${e.paymentMethod||'—'}</td>
+      <td>${e.status}</td>
+    </tr>`).join('');
   }
 
-  const workerRows=DB.workers.map(w=>{const att=attDay[w.id]||{};return`<tr><td>${w.name}</td><td>${w.role}</td><td>${att.checkIn||'—'}</td><td>${att.checkOut||'—'}</td><td>${att.status||'absent'}</td></tr>`;}).join('');
-  const logoSrc=new URL('logo.png',window.location.href).href;
-  
-  const html=`<!DOCTYPE html><html><head><title>Easter Car Wash — ${dateStr}</title><style>
-  body{font-family:sans-serif;padding:28px;color:#111;max-width:1100px;margin:0 auto}
-  .hdr{display:flex;align-items:center;gap:16px;margin-bottom:8px}
-  .hdr img{height:54px}.brand{color:#c8102e;font-size:22px;font-weight:bold;margin:0}.sub{color:#666;margin-top:4px}
-  .info-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0}
-  .ibox{border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center}
-  .iv{font-size:22px;font-weight:bold;color:#c8102e}.il{font-size:10px;color:#666;text-transform:uppercase;margin-top:4px}
-  h2{font-size:15px;margin:22px 0 8px;padding-bottom:6px;border-bottom:2px solid}
-  h2.car-head{color:#2563eb;border-color:#2563eb}
-  h2.bike-head{color:#ea580c;border-color:#ea580c}
-  h2.att-head{color:#16a34a;border-color:#16a34a}
-  .section-summary{display:flex;gap:20px;margin-bottom:10px;font-size:13px}
-  .ss-box{background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:8px 14px;min-width:100px}
-  .ss-val{font-size:18px;font-weight:bold}.ss-lbl{font-size:10px;color:#6b7280;text-transform:uppercase}
-  table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:20px}
-  th{padding:7px 8px;text-align:left;font-size:10px}
-  td{padding:6px 8px;border-bottom:1px solid #eee}
-  tr:nth-child(even) td{background:#f9fafb}
-  thead.car-head th{background:#eff6ff;color:#1d4ed8}
-  thead.bike-head th{background:#fff7ed;color:#c2410c}
-  thead.att-head th{background:#f0fdf4;color:#15803d}
-  .footer{margin-top:24px;text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:12px}
-  .grand-total{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:14px 20px;margin:16px 0;display:flex;gap:30px;align-items:center}
-  .gt-val{font-size:26px;font-weight:bold;color:#15803d}.gt-lbl{font-size:11px;color:#6b7280;text-transform:uppercase}
+  function buildSummaryRow(label,list){
+    const comp=list.filter(h=>h.status==='completed');
+    const rev=comp.reduce((s,h)=>s+(h.amount||0),0);
+    const upi=comp.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0);
+    const cash=comp.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0);
+    return `<tr style="font-weight:600;background:#f8fafc">
+      <td>${label}</td><td>${list.length} entries</td><td>${comp.length} completed</td>
+      <td>₹${rev} total</td><td>₹${upi} UPI</td><td>₹${cash} Cash</td>
+    </tr>`;
+  }
+
+  const workerRows=DB.workers.map(w=>{const att=attDay[w.id]||{};return `<tr><td>${w.name}</td><td>${w.role}</td><td>${att.checkIn||'—'}</td><td>${att.checkOut||'—'}</td><td>${att.status||'absent'}</td></tr>`;}).join('');
+
+  const html=`<!DOCTYPE html><html><head><title>Easter Car Wash — ${dateStr}</title>
+  <style>
+    body{font-family:sans-serif;padding:28px;color:#111;max-width:1050px;margin:0 auto}
+    h1{color:#c8102e;font-size:22px;margin:0}
+    h2{font-size:16px;margin:24px 0 8px;color:#c8102e;border-bottom:2px solid #c8102e;padding-bottom:6px}
+    h3{font-size:13px;margin:16px 0 6px;color:#444;text-transform:uppercase;letter-spacing:0.5px}
+    .hdr{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+    .sub{color:#666;margin-top:4px;font-size:13px}
+    .info{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:14px 0}
+    .ibox{border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center}
+    .iv{font-size:26px;font-weight:bold;color:#c8102e}
+    .il{font-size:10px;color:#666;text-transform:uppercase;margin-top:4px}
+    .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0}
+    .sbox{border:2px solid #ddd;border-radius:10px;padding:16px}
+    .sbox.cars{border-color:#4f8ef7}
+    .sbox.bikes{border-color:#f97c4f}
+    .sbox-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px}
+    .sbox.cars .sbox-title{color:#4f8ef7}
+    .sbox.bikes .sbox-title{color:#f97c4f}
+    .sbox-val{font-size:22px;font-weight:800;margin-bottom:3px}
+    .sbox-sub{font-size:11px;color:#666}
+    table{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+    th{background:#c8102e;color:#fff;padding:7px 8px;text-align:left}
+    td{padding:6px 8px;border-bottom:1px solid #eee}
+    tr:nth-child(even) td{background:#f9fafb}
+    .section-divider{margin:28px 0 8px;border-top:3px solid #eee;padding-top:16px}
+    .total-bar{background:#1a2540;color:#fff;padding:12px 18px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+    .total-bar span{font-size:13px;opacity:0.8}
+    .total-bar strong{font-size:18px;color:#22d98a}
+    .footer{margin-top:24px;text-align:center;color:#999;font-size:11px;border-top:1px solid #eee;padding-top:12px}
   </style></head><body>
-  <div class="hdr"><img src="${logoSrc}" alt="Easter Group"><div><div class="brand">🚗 Easter Car Wash — Daily Report</div><div class="sub">${new Date(dateStr).toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div></div></div>
-  
-  <!-- Grand Total Summary -->
-  <div class="grand-total">
-    <div><div class="gt-val">₹${totalRevenue}</div><div class="gt-lbl">Total Revenue</div></div>
-    <div><div class="gt-val">${entries.length}</div><div class="gt-lbl">Total Entries</div></div>
-    <div><div class="gt-val">${carCompleted.length+bikeCompleted.length}</div><div class="gt-lbl">Completed</div></div>
-    <div><div class="gt-val">₹${carUpiRev+bikeUpiRev}</div><div class="gt-lbl">UPI Total</div></div>
-    <div><div class="gt-val">₹${carCashRev+bikeCashRev}</div><div class="gt-lbl">Cash Total</div></div>
+  <div class="hdr"><div><h1>🚗 Easter Car Wash — Daily Report</h1><div class="sub">${new Date(dateStr).toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div></div></div>
+
+  <!-- Summary Cards -->
+  <div class="info">
+    <div class="ibox"><div class="iv">${entries.length}</div><div class="il">Total Entries</div></div>
+    <div class="ibox"><div class="iv">${completedCars.length+completedBikes.length}</div><div class="il">Completed</div></div>
+    <div class="ibox"><div class="iv">₹${totalRev}</div><div class="il">Total Revenue</div></div>
+    <div class="ibox"><div class="iv">₹${upiRev}</div><div class="il">UPI</div></div>
+    <div class="ibox"><div class="iv">₹${cashRev}</div><div class="il">Cash</div></div>
+  </div>
+
+  <!-- Cars vs Bikes summary boxes -->
+  <div class="summary-grid">
+    <div class="sbox cars">
+      <div class="sbox-title">🚗 Cars / SUVs</div>
+      <div class="sbox-val" style="color:#4f8ef7">₹${carRev}</div>
+      <div class="sbox-sub">${allCars.length} entries · ${completedCars.length} completed</div>
+      <div style="margin-top:6px;font-size:11px;color:#666">
+        UPI: ₹${completedCars.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0)} &nbsp;|&nbsp;
+        Cash: ₹${completedCars.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0)}
+      </div>
+    </div>
+    <div class="sbox bikes">
+      <div class="sbox-title">🏍️ Bikes / Superbikes</div>
+      <div class="sbox-val" style="color:#f97c4f">₹${bikeRev}</div>
+      <div class="sbox-sub">${allBikes.length} entries · ${completedBikes.length} completed</div>
+      <div style="margin-top:6px;font-size:11px;color:#666">
+        UPI: ₹${completedBikes.filter(h=>h.paymentMethod==='upi').reduce((s,h)=>s+(h.amount||0),0)} &nbsp;|&nbsp;
+        Cash: ₹${completedBikes.filter(h=>h.paymentMethod==='cash').reduce((s,h)=>s+(h.amount||0),0)}
+      </div>
+    </div>
   </div>
 
   <!-- CARS SECTION -->
-  <h2 class="car-head">🚗 Cars / SUVs</h2>
-  <div class="section-summary">
-    <div class="ss-box"><div class="ss-val" style="color:#2563eb">${carEntries.length}</div><div class="ss-lbl">Entries</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#16a34a">${carCompleted.length}</div><div class="ss-lbl">Completed</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#15803d">₹${carRevenue}</div><div class="ss-lbl">Revenue</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#7c3aed">₹${carUpiRev}</div><div class="ss-lbl">UPI</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#d97706">₹${carCashRev}</div><div class="ss-lbl">Cash</div></div>
-  </div>
-  <table><thead class="car-head"><tr><th>#</th><th>Vehicle</th><th>Customer</th><th>Phone</th><th>Model</th><th>Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th><th>Time</th></tr></thead><tbody>${buildTable(carEntries,'#2563eb')}</tbody></table>
-  
-  <!-- BIKES SECTION -->
-  <h2 class="bike-head">🏍️ Bikes / Superbikes</h2>
-  <div class="section-summary">
-    <div class="ss-box"><div class="ss-val" style="color:#ea580c">${bikeEntries.length}</div><div class="ss-lbl">Entries</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#16a34a">${bikeCompleted.length}</div><div class="ss-lbl">Completed</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#15803d">₹${bikeRevenue}</div><div class="ss-lbl">Revenue</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#7c3aed">₹${bikeUpiRev}</div><div class="ss-lbl">UPI</div></div>
-    <div class="ss-box"><div class="ss-val" style="color:#d97706">₹${bikeCashRev}</div><div class="ss-lbl">Cash</div></div>
-  </div>
-  <table><thead class="bike-head"><tr><th>#</th><th>Vehicle</th><th>Customer</th><th>Phone</th><th>Model</th><th>Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th><th>Time</th></tr></thead><tbody>${buildTable(bikeEntries,'#ea580c')}</tbody></table>
+  <h2>🚗 Cars &amp; SUVs — Detail</h2>
+  <table>
+    <thead><tr><th>#</th><th>Vehicle</th><th>Customer</th><th>Phone</th><th>Model</th><th>Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th></tr></thead>
+    <tbody>${buildTableRows(allCars)}</tbody>
+    <tfoot>
+      <tr style="font-weight:800;background:#e8f0fe">
+        <td colspan="7" style="text-align:right;padding-right:12px">Cars Subtotal (completed):</td>
+        <td>₹${carRev}</td>
+        <td colspan="3"></td>
+      </tr>
+    </tfoot>
+  </table>
 
-  <!-- WORKER ATTENDANCE -->
-  <h2 class="att-head">👷 Worker Attendance</h2>
-  <table><thead class="att-head"><tr><th>Name</th><th>Role</th><th>Check In</th><th>Check Out</th><th>Status</th></tr></thead><tbody>${workerRows||'<tr><td colspan="5" style="text-align:center">No workers</td></tr>'}</tbody></table>
-  
-  <div class="footer">Generated by Easter Car Wash Management System · Easter Group · ${new Date().toLocaleString('en-IN')}</div>
+  <!-- BIKES SECTION -->
+  <div class="section-divider"></div>
+  <h2>🏍️ Bikes &amp; Superbikes — Detail</h2>
+  <table>
+    <thead><tr><th>#</th><th>Vehicle</th><th>Customer</th><th>Phone</th><th>Model</th><th>Type</th><th>Wash</th><th>Amount</th><th>Payment</th><th>Method</th><th>Status</th></tr></thead>
+    <tbody>${buildTableRows(allBikes)}</tbody>
+    <tfoot>
+      <tr style="font-weight:800;background:#fff0eb">
+        <td colspan="7" style="text-align:right;padding-right:12px">Bikes Subtotal (completed):</td>
+        <td>₹${bikeRev}</td>
+        <td colspan="3"></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Grand Total -->
+  <div class="total-bar">
+    <span>Grand Total Revenue (Completed Washes)</span>
+    <strong>₹${totalRev}</strong>
+  </div>
+
+  <!-- Workers -->
+  <h2>👷 Worker Attendance</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th>Check In</th><th>Check Out</th><th>Status</th></tr></thead>
+    <tbody>${workerRows||'<tr><td colspan="5" style="text-align:center">No workers</td></tr>'}</tbody>
+  </table>
+
+  <div class="footer">Generated by Easter Car Wash Management System · ${new Date().toLocaleString('en-IN')}</div>
   </body></html>`;
   const win=window.open('','_blank');win.document.write(html);win.document.close();setTimeout(()=>win.print(),600);
 }
@@ -1829,8 +2439,8 @@ function exportDailyPDF(){
 function exportCSV(){
   const dateStr=document.getElementById('filterDate')?.value||todayStr();
   const entries=DB.history.filter(h=>h.entryTime&&h.entryTime.startsWith(dateStr));
-  const headers='ID,VehicleNum,Name,Phone,Model,VehicleType,VehicleGroup,WashType,Amount,PaymentStatus,PaymentMethod,Status,EntryTime,StartTime,EndTime';
-  const rows=entries.map(e=>[e.id,e.vehicleNum,e.name||'',e.phone,e.model||'',e.vehicleType,isBikeType(e.vehicleType)?'Bike':'Car',e.washType,e.amount,e.paymentStatus||'unpaid',e.paymentMethod||'',e.status,fmtTime(e.entryTime),e.startTime?fmtTime(e.startTime):'',e.endTime?fmtTime(e.endTime):''].join(',')).join('\n');
+  const headers='ID,VehicleNum,Category,Name,Phone,Model,VehicleType,WashType,Amount,PaymentStatus,PaymentMethod,Status,EntryTime,StartTime,EndTime';
+  const rows=entries.map(e=>[e.id,e.vehicleNum,CAT_META[e.vehicleType]?.isBike?'Bike':'Car',e.name||'',e.phone,e.model||'',e.vehicleType,e.washType,e.amount,e.paymentStatus||'unpaid',e.paymentMethod||'',e.status,fmtTime(e.entryTime),e.startTime?fmtTime(e.startTime):'',e.endTime?fmtTime(e.endTime):''].join(',')).join('\n');
   const blob=new Blob([headers+'\n'+rows],{type:'text/csv'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download=`easter_carwash_${dateStr}.csv`;a.click();
@@ -1839,14 +2449,15 @@ function exportCSV(){
 
 /* ── Utilities ── */
 function todayStr(){return new Date().toISOString().split('T')[0];}
-function fmtTime(iso){if(!iso)return'—';try{return new Date(iso).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}catch(e){return'—';}}
-function setTxt(id,val){const el=document.getElementById(id);if(el)el.textContent=val;}
-
+function fmtTime(iso){if(!iso) return '—';try{return new Date(iso).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}catch(e){return '—';}}
+function setTxt(id,val){const el=document.getElementById(id);if(el) el.textContent=val;}
 function toast(msg,type='info'){
   const c=document.getElementById('toast-container');
   const t=document.createElement('div');t.className='toast '+type;t.textContent=msg;c.appendChild(t);
   setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(100%)';t.style.transition='all 0.3s';setTimeout(()=>t.remove(),300);},3000);
 }
+// Show loader immediately, hide after a short delay if no Firebase
+window.addEventListener('DOMContentLoaded',()=>{ if(!window.__ECW_RT__) setTimeout(hideLoader,800); });
 </script>
 </body>
 </html>
